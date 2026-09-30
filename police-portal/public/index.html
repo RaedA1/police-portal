@@ -135,17 +135,29 @@ dialog::backdrop{background:#000a}
 .form2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:720px){.dc{padding:40px 34px;min-height:300px}.drow{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.ph{margin:26px 0 10px;color:var(--ac)}
+.ptb th,.ptb td{text-align:center}
+.ptb .n{font-weight:700;color:var(--ac)}
+.ptb .d{direction:ltr;color:var(--mu);font-size:.85rem;white-space:nowrap}
+.ptb .nt{border-inline-start:1px solid var(--line);line-height:2;min-width:190px}
+.ptb .r{color:var(--bad)}
+.pnote{display:none;margin-bottom:10px;line-height:2}
+.pwrap{position:relative;display:block}.pwrap input{width:100%;padding-inline-end:44px}
+.eye{position:absolute;inset-inline-end:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--mu);cursor:pointer;padding:6px;display:grid}
+.eye:hover{color:var(--tx)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:720px){.ptb td{text-align:start}.ptb .nt{display:none}.pnote{display:block}}
 </style>
 </head>
 <body>
 <header><div class="bar">
 <div class="logo"><img id="lgo" alt="" width="38" height="38"><span>LOS SANTOS PD</span></div>
-<nav aria-label="Main"><a href="#home" data-r="home">Home</a><a href="#promotions" data-r="promotions">Promotion Requirements</a><a href="#departments" data-r="departments">Departments</a></nav>
+<nav aria-label="Main"><a href="#home" data-r="home">Home</a><a href="#promotions" data-r="promotions">Promotion Requirements</a><a href="#departments" data-r="departments">Departments</a><a href="#protocols" data-r="protocols">Protocols</a></nav>
 <a class="btn ghost sm" id="adm" href="#admin">Admin</a>
 <button class="btn ghost sm" id="lg" type="button"></button>
 </div></header>
 <main id="app"></main>
-<footer><strong>Maded By: BROOF CHANDLER<span class="sep"> - </span>Rick Oliver</strong></footer>
+<footer><strong>Made By: BROOF CHANDLER<span class="sep"> - </span>Rick Oliver</strong></footer>
 <div id="toast" role="status" aria-live="polite"></div>
 <dialog id="dlg"><p id="dmsg"></p><div style="display:flex;gap:10px;margin-top:18px;justify-content:flex-end"><button class="btn ghost" id="dno">Cancel</button><button class="btn danger" id="dyes">Confirm</button></div></dialog>
 
@@ -195,7 +207,7 @@ const h=(location.hash||"#home").slice(1);
 document.documentElement.dataset.theme=(h==="departments"&&dept)?dept:"default";
 document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r===h));
 app.style.animation="none";void app.offsetWidth;app.style.animation="";
-({home:pHome,promotions:pPromo,departments:pDept,admin:pAdmin}[h]||pHome)();stagger();scrollTo(0,0)}
+({home:pHome,promotions:pPromo,departments:pDept,protocols:pProtocols,admin:pAdmin}[h]||pHome)();stagger();scrollTo(0,0)}
 function stagger(){document.querySelectorAll(".grid,.req,.ranks").forEach(g=>{g.classList.add("rise");[...g.children].forEach((c,i)=>c.style.setProperty("--i",i))})}
 addEventListener("hashchange",()=>{dept=null;route()});
 /* ---------- Home ---------- */
@@ -250,6 +262,30 @@ app.innerHTML=`<h2>Departments</h2>
 <div class="dcards">${Object.entries(DB.depts).map(([k,v])=>`<button class="dc ${dept===k?"on":""}" data-d="${k}" aria-pressed="${dept===k}">${DL[k]?`<img class="emb" src="${DL[k]}" alt="">`:(em[k]||"")}<h1>${esc(v.title)}</h1><p>${DESC[k]||""}</p></button>`).join("")}</div>
 ${d?`<section class="org"><h2><img class="oi" src="${DL[dept]||""}" alt="">${esc(d.title)} Leadership</h2>${P(ROLES[dept][0],d.cmd,d.cmdUnit,"top")}${P(ROLES[dept][1],d.dep,d.depUnit,"mid")}${(d.mgmtList||[]).length?`<div class="orow">${d.mgmtList.map(m=>P(ROLES[dept][2],m.n,m.u,"low")).join("")}</div>`:""}</section>`:`<p class="mu" style="margin-top:20px">Select a department to view its leadership.</p>`}`;
 app.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{dept=b.dataset.d;document.documentElement.dataset.theme=dept;pDept()})}
+/* ---------- Protocols ---------- */
+function pProtocols(){
+const U="U-1 TO Dispatch | ",dc=[0,1,2,3,4,6,7,8,9,10];
+const C=[["كود زيرو","عموم الوحدات تتوجه للحالة (استنفار امني)"],["كود ون","غلق السفلي و الوناانات"],["كود تو","اشغل السفلي فقط"],["كود ثري","اشغل السفلي و الوناانات"],["كود فور","المكان امن وخالي"],["كود فايف","جاري التحقق من المكان او الحاله وتفتيش المنطقة"],["كود سكس","مسح البصمات واخذ صور لموقع الجريمة"],["",""],["",""],["",""]];
+const TN=[["10-0","تن - زيرو","اختفى الشخص (ليس لي رؤيه عليه)"],["10-1","تن - ون","مطاردة مركبه"],["10-2","تن - تو","غير صحيح"],["10-3","تن - ثري","استيقاف (نوع الاستيقاف - مروري - جنائي)"],["10-4","تن - فور","صحيح او استلمت"],["10-10","تن - تن","تم الانتهاء من الحالة"],["10-19","تن - نايتين","مطاردة على الاقدام"],["10-20","تن - تونتي","موقعه"],["20-2","تونتي - تو","اطلاق نار"],["20-3","تونتي - ثري","احتاج دعم"]];
+const RB=[["10-5","تن-فايف","سرقة السيارة"],["10-6","تن-سكس","سرقة منزل"],["10-7","تن-سفن","سرقة بقالة"],["10-8","تن-ايت","سرقة فليكا"],["10-9","تن-ناين","سرقة اللاندري"],["10-15","تن-فيفتين","سرقة كاش اكس تشينج"],["10-16","تن-سيكستين","سرقة البنك المركزي"]];
+const Z=[["0-1","زيرو ون","استراحة او تسجيل خروج مؤقت"],["0-2","زيرو تو","الشاره واضحه"],["0-3","زيرو ثري","التأكد من اشارة الراديو"],["0-4","زيرو فور","غلق البلاغ"],["0-5","زيرو فايف","العسكري مشغول (Busy)"],["0-6","زيرو سكس","كرر البلاغ"],["0-7","زيرو سفن","تسجيل خروج"],["0-8","زيرو ايت","تسجيل دخول"],["0-9","زيرو ناين","مشكلة برمجيه او فلتش"]];
+const L=["البلاغ","طريقة البلاغ","الاختصار","طريقة القاء البلاغ"];
+const H=`<thead><tr>${L.map(x=>`<th>${x}</th>`).join("")}</tr></thead>`;
+const row=(a,b,c,d,x="")=>`<tr><td class="n" data-l="${L[0]}">${a}</td><td data-l="${L[1]}">${b}</td><td data-l="${L[2]}">${c}</td>${d===null?"":`<td class="d" data-l="${L[3]}">${d}</td>`}${x}</tr>`;
+const tb=(rows,pre="")=>`<div class="sw card">${pre}<table class="tbl ptb">${H}<tbody>${rows}</tbody></table></div>`;
+const ins='فروم (<span class="r">ديسباتش</span>) تو (<span class="r">يونت</span>) توجه الى {1-10 <span class="r">رقم البلاغ</span>}';
+app.innerHTML=`<h2>Protocols</h2>
+<h3 class="ph">Codes</h3>${tb(C.map((r,i)=>row("Code "+i,r[0],r[1],U+"5-10 اخر code "+dc[i])).join(""))}
+<h3 class="ph">10-Codes</h3>${tb(TN.map(r=>row(r[0],r[1],r[2],U+r[0])).join(""))}
+<h3 class="ph">Robbery Codes</h3>${tb(RB.map((r,i)=>row(r[0],r[1],r[2],null,i?"":`<td class="nt" rowspan="${RB.length}">${ins}</td>`)).join(""),`<p class="pnote">${ins}</p>`)}
+<h3 class="ph">0 Code</h3>${tb(Z.map(r=>row(r[0],r[1],r[2],U+r[0].replace("-"," - "))).join(""))}`}
+/* ---------- Login lock countdown ---------- */
+function lockCount(sec){const e=$("#pe"),b=$("#go");if(!e||!b)return;clearInterval(lockCount.t);b.disabled=true;
+const tick=()=>{if(!document.body.contains(e)){clearInterval(lockCount.t);return}
+if(sec<=0){clearInterval(lockCount.t);e.textContent="";b.disabled=false;return}
+e.textContent=T("Too many attempts. Try again in ")+Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");sec--};
+tick();lockCount.t=setInterval(tick,1000)}
+const EYE=['<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>','<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>'];
 /* ---------- Admin (client-side demo auth; see notes) ---------- */
 let authed=false;
 const ADMIN={s:[83, 213, 17, 206, 48, 56, 211, 110, 72, 164, 79, 90, 62, 254, 71, 112],h:"66de2f3d0946c747948885db007e09a24167a305888917677001a67509c13a7c"};
@@ -258,10 +294,11 @@ const b=await crypto.subtle.deriveBits({name:"PBKDF2",salt,iterations:210000,has
 async function pAdmin(){
 if(authed)return adminUI();
 app.innerHTML=`<div class="card" style="max-width:400px;margin:auto"><h2>Admin sign in</h2>
-<label class="f">Password<input id="pw" type="password" autocomplete="current-password"></label><div class="err" id="pe"></div>
+<label class="f">Password<span class="pwrap"><input id="pw" type="password" autocomplete="current-password"><button type="button" class="eye" id="eye"></button></span></label><div class="err" id="pe"></div>
 <button class="btn" id="go" style="margin-top:8px">Sign in</button></div>`;
 $("#pw").onkeydown=e=>{if(e.key==="Enter")$("#go").click()};
-$("#go").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password:$("#pw").value})});const j=await r.json().catch(()=>({}));if(r.ok&&j.ok){authed=true;csrf=j.csrf;adminUI()}else if(r.status===429)$("#pe").textContent="Too many attempts. Try again later.";else if(r.status===500)$("#pe").textContent="Server is not configured.";else $("#pe").textContent="Incorrect password."}catch(e){$("#pe").textContent="Connection error."}}}
+{const b=$("#eye"),p=$("#pw"),sv=s=>{p.type=s?"text":"password";b.setAttribute("aria-label",T(s?"Hide password":"Show password"));b.innerHTML=EYE[s]};sv(0);b.onclick=()=>sv(p.type==="password"?1:0)}
+$("#go").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password:$("#pw").value})});const j=await r.json().catch(()=>({}));if(r.ok&&j.ok){authed=true;csrf=j.csrf;adminUI()}else if(r.status===429)lockCount(+j.retryAfter||180);else if(r.status===500)$("#pe").textContent="Server is not configured.";else $("#pe").textContent="Incorrect password."}catch(e){$("#pe").textContent="Connection error."}}}
 function adminUI(){
 app.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><h2>Admin Panel</h2><button class="btn ghost sm" id="lo">Sign out</button></div>
 <div class="tabs">${[["ranks","Ranks"],["wings","Wings"],["depts","Departments"],["news","Announcements"],["backup","Backup"],["log","Audit log"]].map(t=>`<button class="btn ${tab===t[0]?"":"ghost"} sm" data-tab="${t[0]}">${t[1]}</button>`).join("")}</div><div id="tb"></div>`;
@@ -354,6 +391,7 @@ Object.assign(AR,{"Wings":"الوينقات","Required Wings":"الوينقات 
 Object.assign(AR,{"Enter a password.":"أدخل كلمة المرور.","Reset password":"إعادة تعيين كلمة المرور","Reset the admin password? Your saved data stays.":"إعادة تعيين كلمة مرور الإدارة؟ بياناتك المحفوظة تبقى كما هي.","Not required":"غير مطلوب","Responsibility role":"المسؤولية المطلوبة","Must take a responsibility, e.g. wing lead":"يجب استلام مسؤولية، مثل مسؤول أحد الوينقات","Must take a responsibility (e.g. wing lead)":"يجب استلام مسؤولية (مثل مسؤول أحد الوينقات)","Maximum reached":"وصلت للحد الأقصى","Delete this Management entry?":"حذف هذا العنصر من Management؟","Wings Leadership": "قيادة الوينقات", "Specialist units and their leadership.": "الوحدات المتخصصة وقياداتها.", "Save Wings": "حفظ الوينقات", "Announcements": "الإعلانات", "Backup": "نسخة احتياطية", "Export backup": "تصدير نسخة احتياطية", "Import backup": "استيراد نسخة احتياطية", "Backup imported": "تم استيراد النسخة", "Invalid backup file": "ملف النسخة غير صالح", "Replace all current data with this backup?": "استبدال كل البيانات الحالية بهذه النسخة؟", "Save a backup file to keep your data safe or move it to another browser.": "احفظ ملف نسخة احتياطية لحماية بياناتك أو لنقلها إلى متصفح آخر.", "Title": "العنوان", "Text": "النص", "Publish": "نشر", "Published": "تم النشر", "Date": "التاريخ", "No announcements yet.": "لا توجد إعلانات بعد.", "Title is required.": "العنوان مطلوب.", "Delete this announcement?": "حذف هذا الإعلان؟", "Deleted": "تم الحذف","LOS SANTOS PD":"موقع الشرطة","Admin":"الإدارة","Promotion & Personnel":"موقع الترقيات","Promotion to Officers: Proof of Merit":"الترقية لضباط إثبات جدارة"});
 const RX=[[/^Last updated: (.*)$/,'آخر تحديث: $1'],[/^Required from (.*) and above$/,'مطلوب من $1 فما فوق'],[/^Delete rank "(.*)"\?$/,'حذف الرتبة "$1"؟'],[/^Delete wing "(.*)"\? It is removed from all ranks\.$/,'حذف الوينق "$1"؟ سيتم إزالته من جميع الرتب.'],[/^Too many attempts\. Wait (\d+)s\.$/,'محاولات كثيرة. انتظر $1 ثانية.']];
 Object.assign(AR,{"Session expired. Sign in again.":"انتهت الجلسة. سجّل الدخول من جديد.","Save failed. Please try again.":"فشل الحفظ. حاول مرة أخرى.","Save failed. No connection.":"فشل الحفظ. لا يوجد اتصال.","Too many attempts. Try again later.":"محاولات كثيرة. حاول لاحقاً.","Server is not configured.":"الخادم غير مهيأ (ADMIN_PASSWORD / SESSION_SECRET).","Connection error.":"خطأ في الاتصال."});
+Object.assign(AR,{"Protocols":"البروتوكولات","Show password":"إظهار كلمة المرور","Hide password":"إخفاء كلمة المرور","Too many attempts. Try again in":"محاولات كثيرة. حاول بعد"});
 let lang=(()=>{try{return localStorage.getItem("portal.lang")==="en"?"en":"ar"}catch(e){return"ar"}})();
 function T(s){if(lang!=="ar")return s;const k=s.trim();if(!k)return s;if(Object.hasOwn(AR,k))return s.replace(k,()=>AR[k]);for(const[r,v]of RX)if(r.test(k))return s.replace(k,k.replace(r,v));return s}
 function t1(n){if(n.parentNode&&n.parentNode.closest("footer,script,[translate=no]"))return;const v=T(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v}
