@@ -9,6 +9,7 @@ const J = (o, s = 200, x = {}) => new Response(JSON.stringify(o), {
 const sha = v => crypto.createHash("sha256").update(String(v)).digest();
 const same = (a, b) => crypto.timingSafeEqual(sha(a), sha(b));
 const sign = (p, k) => crypto.createHmac("sha256", k).update(p).digest("base64url");
+const LOCK_SEC = 180;
 const COOKIE = "HttpOnly; Secure; SameSite=Strict; Path=/";
 
 function mint(k) {
@@ -81,7 +82,11 @@ export default async (req, ctx) => {
       const ip = ctx?.ip || req.headers.get("x-nf-client-connection-ip") || "0";
       const rk = "rl-" + sha(ip).toString("hex").slice(0, 24);
       const rl = (await st.get(rk, { type: "json" })) || { n: 0, u: 0 };
-      if (rl.u > Date.now()) return J({ error: "limited" }, 429);
+      if (rl.u > Date.now()) {
+        const left = Math.ceil((rl.u - Date.now()) / 1000);
+        return J({ error: "limited", retryAfter: left }, 429, { "retry-after": String(left) });
+      }
+      if (rl.u) { rl.n = 0; rl.u = 0; }
       let b; try { b = await body(req, 2000); } catch { return J({ error: "invalid" }, 400); }
       if (typeof b.password === "string" && same(b.password, pw)) {
         await st.delete(rk);
@@ -90,10 +95,11 @@ export default async (req, ctx) => {
         return J({ ok: true, csrf: s.c }, 200, { "set-cookie": `sid=${s.tok}; ${COOKIE}; Max-Age=7200` });
       }
       rl.n++;
-      if (rl.n >= 5) rl.u = Date.now() + Math.min(rl.n - 4, 15) * 60000;
+      const locked = rl.n >= 5;
+      if (locked) rl.u = Date.now() + LOCK_SEC * 1000;
       await st.setJSON(rk, rl);
       await new Promise(r => setTimeout(r, 400));
-      return J({ error: "denied" }, 401);
+      return locked ? J({ error: "limited", retryAfter: LOCK_SEC }, 429, { "retry-after": String(LOCK_SEC) }) : J({ error: "denied" }, 401);
     }
 
     /* everything below requires a valid admin session */
