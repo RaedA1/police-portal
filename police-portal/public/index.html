@@ -138,15 +138,19 @@ dialog::backdrop{background:#000a}
 .ph{margin:26px 0 10px;color:var(--ac)}
 .ptb th,.ptb td{text-align:center}
 .ptb .n{font-weight:700;color:var(--ac)}
-.ptb .d{direction:ltr;color:var(--mu);font-size:.85rem;white-space:nowrap}
-.ptb .nt{border-inline-start:1px solid var(--line);line-height:2;min-width:190px}
 .ptb .r{color:var(--bad)}
-.pnote{display:none;margin-bottom:10px;line-height:2}
 .pwrap{position:relative;display:block}.pwrap input{width:100%;padding-inline-end:44px}
 .eye{position:absolute;inset-inline-end:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--mu);cursor:pointer;padding:6px;display:grid}
 .eye:hover{color:var(--tx)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-@media(max-width:720px){.ptb td{text-align:start}.ptb .nt{display:none}.pnote{display:block}}
+.psec{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:14px;align-items:start}
+.pbox{position:sticky;top:84px;height:210px;border:1px solid var(--line);border-radius:6px;background:var(--pan);border-inline-start:4px solid var(--ac);padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;transition:border-color .9s}
+.pt{color:var(--mu);font-size:.85rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px 6px;justify-content:center;align-items:center;line-height:1.6}
+.ch{unicode-bidi:isolate;white-space:nowrap}
+.chips.l{direction:ltr}
+@media(min-width:721px){.ptb{table-layout:fixed}.ptb th:nth-child(1){width:18%}.ptb th:nth-child(2){width:24%}.ptb th:nth-child(3){width:58%}}
+@media(max-width:720px){.psec{grid-template-columns:1fr}.pbox{position:static;height:auto;min-height:150px;order:-1}.ptb td{text-align:start}}
 </style>
 </head>
 <body>
@@ -200,11 +204,22 @@ function confirmD(msg){return new Promise(res=>{const d=$("#dlg");$("#dmsg").tex
 $("#dyes").onclick=()=>{d.close();res(true)};$("#dno").onclick=()=>{d.close();res(false)};d.oncancel=()=>res(false)})}
 const track=()=>{try{return JSON.parse(localStorage.getItem("portal.track")||"{}")}catch(e){return{}}};
 const setTrack=t=>{try{localStorage.setItem("portal.track",JSON.stringify(t))}catch(e){}};
+const BK=["academy","affairs","wings"];
+const logoOf=k=>DL[k]||(DB.depts[k]&&DB.depts[k].logo)||"";
+const descOf=k=>DESC[k]||(DB.depts[k]&&DB.depts[k].desc)||"";
+const rolesOf=k=>{if(ROLES[k])return ROLES[k];const d=DB.depts[k]||{},r=d.roles||[];return[r[0]||"Commander",r[1]||"Deputy",d.mg?(r[2]||"Management"):""]};
+const colorOf=k=>({academy:"#d64550",affairs:"#3f8cff",wings:"#d4a93c"})[k]||(DB.depts[k]&&DB.depts[k].color)||"#e8cf55";
+function applyTheme(k){const r=document.documentElement,d=k&&DB.depts[k];
+if(d&&!BK.includes(k)){const c=colorOf(k);r.dataset.theme="custom";r.style.setProperty("--ac",c);r.style.setProperty("--ac2","color-mix(in srgb,"+c+" 28%,#050b1a)")}
+else{r.dataset.theme=d?k:"default";r.style.removeProperty("--ac");r.style.removeProperty("--ac2")}}
+function readLogo(f){return new Promise((res,rej)=>{if(!f||!/^image\/(png|jpeg|webp)$/.test(f.type)||f.size>3e6)return rej();const fr=new FileReader();fr.onerror=()=>rej();
+fr.onload=()=>{const im=new Image();im.onerror=()=>rej();im.onload=()=>{const s=Math.min(1,256/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));
+c.getContext("2d").drawImage(im,0,0,c.width,c.height);let o=c.toDataURL("image/webp",.85);if(!o.startsWith("data:image/webp"))o=c.toDataURL("image/png");o.length>150000?rej():res(o)};im.src=fr.result};fr.readAsDataURL(f)})}
 /* ---------- Router ---------- */
 const app=$("#app");let sel=0,dept=null,tab="ranks";
 function route(){
 const h=(location.hash||"#home").slice(1);
-document.documentElement.dataset.theme=(h==="departments"&&dept)?dept:"default";
+applyTheme(h==="departments"&&dept?dept:null);
 document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r===h));
 app.style.animation="none";void app.offsetWidth;app.style.animation="";
 ({home:pHome,promotions:pPromo,departments:pDept,protocols:pProtocols,admin:pAdmin}[h]||pHome)();stagger();scrollTo(0,0)}
@@ -259,31 +274,33 @@ affairs:'<svg class="emb" viewBox="0 0 64 64" fill="none" stroke="currentColor" 
 em.wings='<svg class="emb" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M32 12l9 4v9c0 8-4 13-9 16-5-3-9-8-9-16v-9z"/><path d="M22 24C14 21 8 22 3 27c6 0 10 1 14 4-5 0-9 2-12 6 5-1 9 0 13 2-3 2-5 5-6 9 8-2 13-6 16-11"/><path d="M42 24c8-3 14-2 19 3-6 0-10 1-14 4 5 0 9 2 12 6-5-1-9 0-13 2 3 2 5 5 6 9-8-2-13-6-16-11"/></svg>';
 const P=(role,n,u,c)=>`<div class="pc ${c}"><div class="pav">${c==="top"?"★":c==="mid"?"☆":"⚑"}</div><div class="pi"><div class="mu" translate="no">${role}</div><h3>${esc(n)||"<span class=mu>Not assigned</span>"}</h3><div class="mu"><span>UNIT:</span> ${esc(u)||"-"}</div></div></div>`;
 app.innerHTML=`<h2>Departments</h2>
-<div class="dcards">${Object.entries(DB.depts).map(([k,v])=>`<button class="dc ${dept===k?"on":""}" data-d="${k}" aria-pressed="${dept===k}">${DL[k]?`<img class="emb" src="${DL[k]}" alt="">`:(em[k]||"")}<h1>${esc(v.title)}</h1><p>${DESC[k]||""}</p></button>`).join("")}</div>
-${d?`<section class="org"><h2><img class="oi" src="${DL[dept]||""}" alt="">${esc(d.title)} Leadership</h2>${P(ROLES[dept][0],d.cmd,d.cmdUnit,"top")}${P(ROLES[dept][1],d.dep,d.depUnit,"mid")}${(d.mgmtList||[]).length?`<div class="orow">${d.mgmtList.map(m=>P(ROLES[dept][2],m.n,m.u,"low")).join("")}</div>`:""}</section>`:`<p class="mu" style="margin-top:20px">Select a department to view its leadership.</p>`}`;
-app.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{dept=b.dataset.d;document.documentElement.dataset.theme=dept;pDept()})}
+<div class="dcards">${Object.entries(DB.depts).map(([k,v])=>`<button class="dc ${dept===k?"on":""}" data-d="${k}" style="--dcol:${colorOf(k)}" aria-pressed="${dept===k}">${logoOf(k)?`<img class="emb" src="${logoOf(k)}" alt="">`:(em[k]||em.affairs)}<h1>${esc(v.title)}</h1><p>${esc(descOf(k))}</p></button>`).join("")}</div>
+${d?`<section class="org"><h2>${logoOf(dept)?`<img class="oi" src="${logoOf(dept)}" alt="">`:""}${esc(d.title)} Leadership</h2>${P(rolesOf(dept)[0],d.cmd,d.cmdUnit,"top")}${P(rolesOf(dept)[1],d.dep,d.depUnit,"mid")}${(d.mgmtList||[]).length?`<div class="orow">${d.mgmtList.map(m=>P(rolesOf(dept)[2],m.n,m.u,"low")).join("")}</div>`:""}</section>`:`<p class="mu" style="margin-top:20px">Select a department to view its leadership.</p>`}`;
+app.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{dept=b.dataset.d;applyTheme(dept);pDept()})}
 /* ---------- Protocols ---------- */
 function pProtocols(){
 const U="U-1 TO Dispatch | ",dc=[0,1,2,3,4,6,7,8,9,10];
-const C=[["كود زيرو","عموم الوحدات تتوجه للحالة (استنفار امني)"],["كود ون","غلق السفلي و الوناانات"],["كود تو","اشغل السفلي فقط"],["كود ثري","اشغل السفلي و الوناانات"],["كود فور","المكان امن وخالي"],["كود فايف","جاري التحقق من المكان او الحاله وتفتيش المنطقة"],["كود سكس","مسح البصمات واخذ صور لموقع الجريمة"],["",""],["",""],["",""]];
+const C=[["كود زيرو","عموم الوحدات تتوجه للحالة (استنفار امني)"],["كود ون","غلق السفلي و الوناانات"],["كود تو","اشغل السفلي فقط"],["كود ثري","اشغل السفلي و الوناانات"],["كود فور","المكان امن وخالي"],["كود فايف","جاري التحقق من المكان او الحاله وتفتيش المنطقة"],["كود سكس","مسح البصمات واخذ صور لموقع الجريمة"]];
 const TN=[["10-0","تن - زيرو","اختفى الشخص (ليس لي رؤيه عليه)"],["10-1","تن - ون","مطاردة مركبه"],["10-2","تن - تو","غير صحيح"],["10-3","تن - ثري","استيقاف (نوع الاستيقاف - مروري - جنائي)"],["10-4","تن - فور","صحيح او استلمت"],["10-10","تن - تن","تم الانتهاء من الحالة"],["10-19","تن - نايتين","مطاردة على الاقدام"],["10-20","تن - تونتي","موقعه"],["20-2","تونتي - تو","اطلاق نار"],["20-3","تونتي - ثري","احتاج دعم"]];
 const RB=[["10-5","تن-فايف","سرقة السيارة"],["10-6","تن-سكس","سرقة منزل"],["10-7","تن-سفن","سرقة بقالة"],["10-8","تن-ايت","سرقة فليكا"],["10-9","تن-ناين","سرقة اللاندري"],["10-15","تن-فيفتين","سرقة كاش اكس تشينج"],["10-16","تن-سيكستين","سرقة البنك المركزي"]];
 const Z=[["0-1","زيرو ون","استراحة او تسجيل خروج مؤقت"],["0-2","زيرو تو","الشاره واضحه"],["0-3","زيرو ثري","التأكد من اشارة الراديو"],["0-4","زيرو فور","غلق البلاغ"],["0-5","زيرو فايف","العسكري مشغول (Busy)"],["0-6","زيرو سكس","كرر البلاغ"],["0-7","زيرو سفن","تسجيل خروج"],["0-8","زيرو ايت","تسجيل دخول"],["0-9","زيرو ناين","مشكلة برمجيه او فلتش"]];
 const L=["البلاغ","طريقة البلاغ","الاختصار","طريقة القاء البلاغ"];
-const H=`<thead><tr>${L.map(x=>`<th>${x}</th>`).join("")}</tr></thead>`;
-const row=(a,b,c,d,x="")=>`<tr><td class="n" data-l="${L[0]}">${a}</td><td data-l="${L[1]}">${b}</td><td data-l="${L[2]}">${c}</td>${d===null?"":`<td class="d" data-l="${L[3]}">${d}</td>`}${x}</tr>`;
-const tb=(rows,pre="")=>`<div class="sw card">${pre}<table class="tbl ptb">${H}<tbody>${rows}</tbody></table></div>`;
-const ins='فروم (<span class="r">ديسباتش</span>) تو (<span class="r">يونت</span>) توجه الى {1-10 <span class="r">رقم البلاغ</span>}';
+const bd=s=>s.replace(/[A-Za-z0-9]+(?:[ .\-\/&'+][A-Za-z0-9]+)*/g,m=>`<bdi dir="ltr">${m}</bdi>`);
+const row=(a,b,c)=>`<tr><td class="n" data-l="${L[0]}">${bd(a)}</td><td data-l="${L[1]}">${bd(b)}</td><td data-l="${L[2]}">${bd(c)}</td></tr>`;
+const Rd=t=>`<span class="r">${t}</span>`,LB=t=>`<bdi dir="ltr">${t}</bdi>`,grp=t=>`{${t}}`;
+const box=(ps,l)=>`<aside class="pbox"><div class="pt">${L[3]}</div><div class="chips${l?" l":""}">${ps.map(p=>`<span class="ch">${p}</span>`).join("")}</div></aside>`;
+const sec=(title,data,ps,m,l)=>`<h3 class="ph">${title}</h3><div class="psec"><div class="sw card"><table class="tbl ptb"><thead><tr>${L.slice(0,3).map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${data.map((r,i)=>row(...m(r,i))).join("")}</tbody></table></div>${box(ps,l)}</div>`;
+const UD=LB("U-1 TO Dispatch"),f3=r=>[r[0],r[1],r[2]];
 app.innerHTML=`<h2>Protocols</h2>
-<h3 class="ph">Codes</h3>${tb(C.map((r,i)=>row("Code "+i,r[0],r[1],U+"5-10 اخر code "+dc[i])).join(""))}
-<h3 class="ph">10-Codes</h3>${tb(TN.map(r=>row(r[0],r[1],r[2],U+r[0])).join(""))}
-<h3 class="ph">Robbery Codes</h3>${tb(RB.map((r,i)=>row(r[0],r[1],r[2],null,i?"":`<td class="nt" rowspan="${RB.length}">${ins}</td>`)).join(""),`<p class="pnote">${ins}</p>`)}
-<h3 class="ph">0 Code</h3>${tb(Z.map(r=>row(r[0],r[1],r[2],U+r[0].replace("-"," - "))).join(""))}`}
+${sec("Codes",C,[LB("U-1 TO Dispatch | 5-10"),"اخر",LB("code"),grp(Rd("رقم الكود"))],(r,i)=>["Code "+i,r[0],r[1]],1)}
+${sec("10-Codes",TN,[UD,"|",grp(Rd("رقم البلاغ"))],f3,1)}
+${sec("Robbery Codes",RB,["فروم","("+Rd("ديسباتش")+")","تو","("+Rd("يونت")+")","توجه الى",grp(LB("1-10")+" "+Rd("رقم البلاغ"))],f3)}
+${sec("0 Code",Z,[UD,"|",LB("0 -"),grp(Rd("رقم البلاغ"))],f3,1)}`}
 /* ---------- Login lock countdown ---------- */
 function lockCount(sec){const e=$("#pe"),b=$("#go");if(!e||!b)return;clearInterval(lockCount.t);b.disabled=true;
 const tick=()=>{if(!document.body.contains(e)){clearInterval(lockCount.t);return}
 if(sec<=0){clearInterval(lockCount.t);e.textContent="";b.disabled=false;return}
-e.textContent=T("Too many attempts. Try again in ")+Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");sec--};
+e.textContent=T("Too many attempts. Try again in ")+"\u2066"+Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0")+"\u2069";sec--};
 tick();lockCount.t=setInterval(tick,1000)}
 const EYE=['<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>','<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>'];
 /* ---------- Admin (client-side demo auth; see notes) ---------- */
@@ -342,17 +359,36 @@ app.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{const i=+b.dataset.r,
 if(e)return e!=="Cancelled"&&toast(e,1);if(!n||n===old)return;DB.wings[i]=n;DB.ranks.forEach(r=>r.wings=r.wings.map(w=>w===old?n:w));save();audit("Renamed wing "+old);toast("Wing renamed");tWings()});
 app.querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{const i=+b.dataset.x,w=DB.wings[i];if(await confirmD(`Delete wing "${w}"? It is removed from all ranks.`)){DB.wings.splice(i,1);DB.ranks.forEach(r=>r.wings=r.wings.filter(x=>x!==w));save();audit("Deleted wing "+w);toast("Wing deleted");tWings()}})}
 function collect(k){const d=DB.depts[k];
+if(!BK.includes(k)&&app.querySelector(`[data-ck="${k}"]`)){const g=f=>{const e=app.querySelector(`[data-ck="${k}"][data-cf="${f}"]`);return e?clean(e.value,f==="desc"?120:40):""};
+d.title=g("title")||d.title;d.desc=g("desc");d.roles=[g("r0"),g("r1"),g("r2")];const c=app.querySelector(`[data-ck="${k}"][data-cf="color"]`);if(c&&/^#[0-9a-f]{6}$/i.test(c.value))d.color=c.value}
 app.querySelectorAll(`[data-k="${k}"]`).forEach(i=>d[i.dataset.f]=clean(i.value));
 d.mgmtList=[...app.querySelectorAll(`[data-mk="${k}"][data-mf="n"]`)].map(n=>({n:clean(n.value),u:clean(app.querySelector(`[data-mk="${k}"][data-mf="u"][data-mi="${n.dataset.mi}"]`).value)}))}
 function tDepts(){
-const inp=(a,ph,v)=>`<input ${a} maxlength="80" placeholder="${ph}" aria-label="${ph}" value="${esc(v)}">`;
+const inp=(a,ph,v,m=80)=>`<input ${a} maxlength="${m}" placeholder="${ph}" aria-label="${ph}" value="${esc(v)}">`;
 const row=(lab,a,b,x)=>`<div class="drow"><div class="mu" translate="no">${lab}</div><div class="form2">${inp(a,"Name",x[0])}${inp(b,"UNIT",x[1])}</div></div>`;
-$("#tb").innerHTML=Object.entries(DB.depts).map(([k,d])=>`<div class="card" style="margin-bottom:14px"><h3>${esc(d.title)}</h3>
-${row(ROLES[k][0],`data-k="${k}" data-f="cmd"`,`data-k="${k}" data-f="cmdUnit"`,[d.cmd,d.cmdUnit])}
-${row(ROLES[k][1],`data-k="${k}" data-f="dep"`,`data-k="${k}" data-f="depUnit"`,[d.dep,d.depUnit])}
-${(d.mgmtList||[]).map((m,i)=>row(ROLES[k][2],`data-mk="${k}" data-mf="n" data-mi="${i}"`,`data-mk="${k}" data-mf="u" data-mi="${i}"`,[m.n,m.u])+(d.mgmtList.length>1?`<div style="text-align:end;margin-top:6px"><button class="btn danger sm" data-dm="${k}:${i}">Delete</button></div>`:"")).join("")}
-<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${ROLES[k][2]?`<button class="btn ghost sm" data-am="${k}">Add Management</button>`:""}<button class="btn sm" data-s="${k}">Save ${esc(d.title)}</button></div></div>`).join("");
-app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const k=b.dataset.s;collect(k);save();audit("Updated department "+k);toast("Saved")});
+const cf=(k,f,l,v,m)=>`<label class="f">${l}${inp(`data-ck="${k}" data-cf="${f}"`,l,v,m)}</label>`;
+const nf=(id,l,v,m)=>`<label class="f">${l}<input id="${id}" maxlength="${m}" value="${esc(v)}"></label>`;
+const add=`<div class="card hl" style="margin-bottom:14px"><h3>Add department</h3><div class="form" style="margin-top:12px">${nf("nd-t","Department name","",40)}${nf("nd-d","Description","",120)}${nf("nd-r0","Commander title","Commander",40)}${nf("nd-r1","Deputy title","Deputy",40)}${nf("nd-r2","Management title","Management",40)}
+<label class="f">Color<input id="nd-c" type="color" value="#e8cf55"></label><label class="f">Logo (PNG, JPG or WebP)<input id="nd-l" type="file" accept="image/png,image/jpeg,image/webp"></label></div>
+<label class="f" style="margin-top:12px"><input type="checkbox" id="nd-m" checked> Has a Management list</label><div class="err" id="nd-e"></div><button class="btn" id="nd-a">Add department</button></div>`;
+$("#tb").innerHTML=add+Object.entries(DB.depts).map(([k,d])=>{const R=rolesOf(k),cu=!BK.includes(k);return`<div class="card" style="margin-bottom:14px"><h3>${esc(d.title)}</h3>
+${cu?`<div class="form" style="margin:12px 0">${cf(k,"title","Department name",d.title,40)}${cf(k,"desc","Description",d.desc||"",120)}${cf(k,"r0","Commander title",(d.roles||[])[0]||"",40)}${cf(k,"r1","Deputy title",(d.roles||[])[1]||"",40)}${d.mg?cf(k,"r2","Management title",(d.roles||[])[2]||"",40):""}
+<label class="f">Color<input type="color" data-ck="${k}" data-cf="color" value="${colorOf(k)}"></label><label class="f">Change logo<input type="file" accept="image/png,image/jpeg,image/webp" data-lk="${k}"></label></div>`:""}
+${row(R[0],`data-k="${k}" data-f="cmd"`,`data-k="${k}" data-f="cmdUnit"`,[d.cmd,d.cmdUnit])}
+${row(R[1],`data-k="${k}" data-f="dep"`,`data-k="${k}" data-f="depUnit"`,[d.dep,d.depUnit])}
+${(d.mgmtList||[]).map((m,i)=>row(R[2],`data-mk="${k}" data-mf="n" data-mi="${i}"`,`data-mk="${k}" data-mf="u" data-mi="${i}"`,[m.n,m.u])+(d.mgmtList.length>1?`<div style="text-align:end;margin-top:6px"><button class="btn danger sm" data-dm="${k}:${i}">Delete</button></div>`:"")).join("")}
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${R[2]?`<button class="btn ghost sm" data-am="${k}">Add Management</button>`:""}<button class="btn sm" data-s="${k}">Save ${esc(d.title)}</button><button class="btn danger sm" data-dd="${k}">Delete department</button></div></div>`}).join("");
+$("#nd-a").onclick=async()=>{const t=clean($("#nd-t").value,40),er=$("#nd-e");er.textContent="";
+if(!t)return er.textContent="Department name is required.";
+if(Object.keys(DB.depts).length>=12)return er.textContent="Maximum reached";
+if(Object.values(DB.depts).some(x=>x.title.toLowerCase()===t.toLowerCase()))return er.textContent="This department already exists.";
+let logo="";const f=$("#nd-l").files[0];if(f){try{logo=await readLogo(f)}catch(x){return er.textContent="Invalid logo file."}}
+const mg=$("#nd-m").checked?1:0,k="d"+crypto.randomUUID().replace(/-/g,"").slice(0,10);
+DB.depts[k]={title:t,desc:clean($("#nd-d").value,120),color:$("#nd-c").value,roles:[0,1,2].map(i=>clean($("#nd-r"+i).value,40)),logo,mg,cmd:"",cmdUnit:"",dep:"",depUnit:"",mgmtList:mg?[{n:"",u:""}]:[]};
+save();audit("Added department "+t);toast("Department added");tDepts()};
+app.querySelectorAll("[data-lk]").forEach(i=>i.onchange=async()=>{const k=i.dataset.lk;try{const l=await readLogo(i.files[0]);collect(k);DB.depts[k].logo=l;save();toast("Saved");tDepts()}catch(x){toast("Invalid logo file.",1)}});
+app.querySelectorAll("[data-dd]").forEach(b=>b.onclick=async()=>{const k=b.dataset.dd;if(DB.depts[k]&&await confirmD(`Delete department "${DB.depts[k].title}"?`)){delete DB.depts[k];if(dept===k)dept=null;save();audit("Deleted department "+k);toast("Department deleted");tDepts()}});
+app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const k=b.dataset.s;collect(k);save();audit("Updated department "+k);toast("Saved");tDepts()});
 app.querySelectorAll("[data-am]").forEach(b=>b.onclick=()=>{const k=b.dataset.am;collect(k);if(DB.depts[k].mgmtList.length>=12)return toast("Maximum reached",1);DB.depts[k].mgmtList.push({n:"",u:""});save();audit("Added Management slot "+k);tDepts()});
 app.querySelectorAll("[data-dm]").forEach(b=>b.onclick=async()=>{const[k,i]=b.dataset.dm.split(":");if(DB.depts[k]&&await confirmD("Delete this Management entry?")){collect(k);DB.depts[k].mgmtList.splice(+i,1);if(!DB.depts[k].mgmtList.length)DB.depts[k].mgmtList.push({n:"",u:""});save();audit("Removed Management entry "+k);tDepts()}})}
 function tNews(){
@@ -365,8 +401,9 @@ if(!v||!Array.isArray(v.ranks)||!Array.isArray(v.wings)||!v.depts||typeof v.dept
 const wings=[...new Set(v.wings.map(w=>clean(w)).filter(w=>w&&w!=="*"))].slice(0,30);
 const ranks=v.ranks.slice(0,30).map(r=>({name:clean(r.name),mdt:num(r.mdt),dispatch:num(r.dispatch),presence:num(r.presence),shift:num(r.shift),shiftDone:r.shiftDone?1:0,active:r.active?1:0,wings:(Array.isArray(r.wings)?r.wings:[]).map(w=>clean(w)).filter(w=>w==="*"||wings.includes(w))}));
 if(!ranks.length||ranks.some(r=>!r.name))throw 0;
-const depts={};for(const k of Object.keys(SEED.depts)){const d=v.depts[k]||SEED.depts[k],o={title:SEED.depts[k].title};["cmd","cmdUnit","dep","depUnit"].forEach(f=>o[f]=clean(d[f]));
-o.mgmtList=SEED.depts[k].mgmtList.length?(Array.isArray(d.mgmtList)&&d.mgmtList.length?d.mgmtList:[{}]).slice(0,12).map(m=>({n:clean(m.n),u:clean(m.u)})):[];depts[k]=o}
+const depts={};for(const[k,d0]of Object.entries(v.depts).slice(0,12)){if(!/^[a-z0-9_]{1,24}$/.test(k))continue;const d=d0||{},b=SEED.depts[k],mg=b?b.mgmtList.length>0:!!d.mg,o={title:b?b.title:(clean(d.title,40)||"Department"),mg:mg?1:0};["cmd","cmdUnit","dep","depUnit"].forEach(f=>o[f]=clean(d[f]));
+if(!b){o.desc=clean(d.desc,120);o.color=/^#[0-9a-f]{6}$/i.test(d.color)?d.color:"#e8cf55";o.roles=[0,1,2].map(i=>clean((d.roles||[])[i],40));o.logo=typeof d.logo==="string"&&d.logo.length<=150000&&/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+\/=]+$/.test(d.logo)?d.logo:""}
+o.mgmtList=mg?(Array.isArray(d.mgmtList)&&d.mgmtList.length?d.mgmtList:[{}]).slice(0,12).map(m=>({n:clean(m.n),u:clean(m.u)})):[];depts[k]=o}
 const news=(Array.isArray(v.news)?v.news:[]).slice(0,20).map(n=>({t:clean(n.t),b:clean(n.b,300),d:clean(n.d,20)})).filter(n=>n.t);
 return{wings,ranks,depts,news}}
 function tBackup(){
@@ -392,8 +429,11 @@ Object.assign(AR,{"Enter a password.":"أدخل كلمة المرور.","Reset p
 const RX=[[/^Last updated: (.*)$/,'آخر تحديث: $1'],[/^Required from (.*) and above$/,'مطلوب من $1 فما فوق'],[/^Delete rank "(.*)"\?$/,'حذف الرتبة "$1"؟'],[/^Delete wing "(.*)"\? It is removed from all ranks\.$/,'حذف الوينق "$1"؟ سيتم إزالته من جميع الرتب.'],[/^Too many attempts\. Wait (\d+)s\.$/,'محاولات كثيرة. انتظر $1 ثانية.']];
 Object.assign(AR,{"Session expired. Sign in again.":"انتهت الجلسة. سجّل الدخول من جديد.","Save failed. Please try again.":"فشل الحفظ. حاول مرة أخرى.","Save failed. No connection.":"فشل الحفظ. لا يوجد اتصال.","Too many attempts. Try again later.":"محاولات كثيرة. حاول لاحقاً.","Server is not configured.":"الخادم غير مهيأ (ADMIN_PASSWORD / SESSION_SECRET).","Connection error.":"خطأ في الاتصال."});
 Object.assign(AR,{"Protocols":"البروتوكولات","Show password":"إظهار كلمة المرور","Hide password":"إخفاء كلمة المرور","Too many attempts. Try again in":"محاولات كثيرة. حاول بعد"});
+Object.assign(AR,{"Add department":"إضافة قسم","Department name":"اسم القسم","Description":"الوصف","Commander title":"مسمى القائد","Deputy title":"مسمى النائب","Management title":"مسمى الإدارة","Color":"اللون","Logo (PNG, JPG or WebP)":"اللوقو (PNG أو JPG أو WebP)","Change logo":"تغيير اللوقو","Has a Management list":"يحتوي على قائمة إدارة","Department name is required.":"اسم القسم مطلوب.","This department already exists.":"هذا القسم موجود مسبقاً.","Invalid logo file.":"ملف اللوقو غير صالح.","Department added":"تمت إضافة القسم","Department deleted":"تم حذف القسم","Delete department":"حذف القسم"});
+RX.push([/^(.+) Leadership$/,"قيادة $1"],[/^Delete department "(.*)"\?$/,'حذف القسم "$1"؟']);
 let lang=(()=>{try{return localStorage.getItem("portal.lang")==="en"?"en":"ar"}catch(e){return"ar"}})();
-function T(s){if(lang!=="ar")return s;const k=s.trim();if(!k)return s;if(Object.hasOwn(AR,k))return s.replace(k,()=>AR[k]);for(const[r,v]of RX)if(r.test(k))return s.replace(k,k.replace(r,v));return s}
+const LT=v=>/[\u0600-\u06FF]/.test(v)?v.replace(/[A-Za-z0-9]+(?:[ .\-\/&'+][A-Za-z0-9]+)*/g,m=>"\u2066"+m+"\u2069"):v;
+function T(s){if(lang!=="ar")return s;const k=s.trim();if(!k)return s;if(Object.hasOwn(AR,k))return s.replace(k,()=>LT(AR[k]));for(const[r,v]of RX)if(r.test(k))return s.replace(k,()=>LT(k.replace(r,v)));return s}
 function t1(n){if(n.parentNode&&n.parentNode.closest("footer,script,[translate=no]"))return;const v=T(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v}
 function walk(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())t1(n);root.querySelectorAll&&root.querySelectorAll("[data-l]").forEach(e=>e.dataset.l=T(e.dataset.l))}
 new MutationObserver(ms=>{if(lang!=="ar")return;for(const m of ms){if(m.type==="characterData")t1(m.target);else m.addedNodes.forEach(n=>n.nodeType===3?t1(n):n.nodeType===1&&walk(n))}}).observe(document.body,{childList:true,characterData:true,subtree:true});
