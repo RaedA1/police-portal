@@ -54,10 +54,17 @@ function sanitize(v) {
   }));
   if (!ranks.length || ranks.some(r => !r.name) || new Set(ranks.map(r => r.name.toLowerCase())).size !== ranks.length) throw new Error("bad");
   const depts = {};
-  for (const [k, [title, mg]] of Object.entries(DEPTS)) {
-    const d = v.depts[k] || {};
-    const o = { title };
+  for (const [k, d0] of Object.entries(v.depts).slice(0, 12)) {
+    if (!/^[a-z0-9_]{1,24}$/.test(k)) continue;
+    const d = d0 || {}, b = DEPTS[k], mg = b ? b[1] : !!d.mg;
+    const o = { title: b ? b[0] : (cl(d.title, 40) || "Department"), mg: mg ? 1 : 0 };
     for (const f of ["cmd", "cmdUnit", "dep", "depUnit"]) o[f] = cl(d[f]);
+    if (!b) {
+      o.desc = cl(d.desc, 120);
+      o.color = /^#[0-9a-f]{6}$/i.test(d.color) ? d.color : "#e8cf55";
+      o.roles = [0, 1, 2].map(i => cl(d.roles?.[i], 40));
+      o.logo = typeof d.logo === "string" && d.logo.length <= 150000 && /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+\/=]+$/.test(d.logo) ? d.logo : "";
+    }
     o.mgmtList = mg ? (Array.isArray(d.mgmtList) && d.mgmtList.length ? d.mgmtList : [{}]).slice(0, 12).map(m => ({ n: cl(m?.n), u: cl(m?.u) })) : [];
     depts[k] = o;
   }
@@ -108,7 +115,7 @@ export default async (req, ctx) => {
     if (m === "GET" && path === "audit") return J({ log: (await st.get("audit", { type: "json" })) || [] });
     if (m === "PUT" && path === "data") {
       if (!same(req.headers.get("x-csrf") || "", s.c)) return J({ error: "forbidden" }, 403);
-      let next; try { next = sanitize(await body(req, 300000)); } catch { return J({ error: "invalid data" }, 400); }
+      let next; try { next = sanitize(await body(req, 2000000)); } catch { return J({ error: "invalid data" }, 400); }
       const old = await st.get("data", { type: "json" });
       const ch = ["wings", "ranks", "depts", "news"].filter(k => JSON.stringify(old?.[k]) !== JSON.stringify(next[k]));
       await st.setJSON("data", next);
