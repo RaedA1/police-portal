@@ -44,6 +44,55 @@ async function log(st, a) {
 /* ---- strict server-side validation (the browser is never trusted) ---- */
 const cl = (s, n = 80) => String(s ?? "").replace(/[\u0000-\u001f<>]/g, "").trim().slice(0, n);
 const num = x => { x = Number(x); if (!Number.isInteger(x) || x < 0 || x > 999) throw new Error("bad"); return x; };
+const LRE = /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+\/=]+$/;
+function cleanProto(p) {
+  return { sections: (Array.isArray(p?.sections) ? p.sections : []).slice(0, 12).map((s, i) => ({
+    id: /^[a-z0-9]{1,16}$/i.test(s?.id) ? s.id : "s" + i, t: cl(s?.t, 60), note: cl(s?.note, 200),
+    rows: (Array.isArray(s?.rows) ? s.rows : []).slice(0, 80).map(r => ({ a: cl(r?.a, 40), b: cl(r?.b, 60), c: cl(r?.c, 120) })).filter(r => r.a || r.b || r.c),
+  })).filter(s => s.t) };
+}
+function cleanWanted(w) {
+  return (Array.isArray(w) ? w : []).slice(0, 40).map(x => ({
+    id: /^[a-z0-9]{1,16}$/i.test(x?.id) ? x.id : "w" + Math.random().toString(36).slice(2, 10),
+    n: cl(x?.n, 60), j: cl(x?.j, 60), d: cl(x?.d, 600), s: x?.s === "arrested" ? "arrested" : "wanted", k: ["low", "medium", "high"].includes(x?.k) ? x.k : "", l: cl(x?.l, 80), r: cl(x?.r, 40),
+    img: typeof x?.img === "string" && x.img.length <= 70000 && LRE.test(x.img) ? x.img : "",
+  })).filter(x => x.n);
+}
+const clL = (s, n) => String(s ?? "").replace(/[\u0000-\u0009\u000b-\u001f<>]/g, "").trim().slice(0, n);
+const okImg = (x, m) => typeof x === "string" && x.length <= m && LRE.test(x) ? x : "";
+function cleanCards(arr, f) {
+  return (Array.isArray(arr) ? arr : []).slice(0, 30).map(x => ({
+    id: /^[a-z0-9]{1,16}$/i.test(x?.id) ? x.id : "c" + Math.random().toString(36).slice(2, 10),
+    n: cl(x?.n, 60), [f]: cl(x?.[f], 60), img: okImg(x?.img, 150000),
+  })).filter(x => x.n);
+}
+const SECK = ["articles", "fines", "outfits"];
+function cleanSecs(o) {
+  const out = {};
+  for (const k of SECK) {
+    const s = o?.[k]; if (!s) continue;
+    out[k] = { v: Math.min(Math.max(+s.v | 0, 0), 99), sections: (Array.isArray(s.sections) ? s.sections : []).slice(0, 40).map((x, i) => ({
+      id: /^[a-z0-9]{1,16}$/i.test(x?.id) ? x.id : "s" + i, t: cl(x?.t, 80), g: x?.g === "w" ? "w" : "",
+      rows: (Array.isArray(x?.rows) ? x.rows : []).slice(0, 150).map(r => { const q = {}; for (const f of "abcde") q[f] = cl(r?.[f], 200); return q; }).filter(r => "abcde".split("").some(f => r[f])),
+    })).filter(x => x.t) };
+  }
+  return out;
+}
+function cleanRoster(r) {
+  const rk = [...new Set((Array.isArray(r?.ranks) ? r.ranks : []).map(x => cl(x, 40)).filter(Boolean))];
+  const seen = new Set(), people = [];
+  for (const p of (Array.isArray(r?.people) ? r.people : []).slice(0, 1000)) {
+    const u = cl(p?.u, 16), rank = cl(p?.r, 40);
+    if (!u || !rank) continue;
+    let id = typeof p?.id === "string" && /^[a-z0-9]{1,16}$/i.test(p.id) ? p.id : "";
+    if (!id || seen.has(id)) id = "p" + Math.random().toString(36).slice(2, 12);
+    seen.add(id); people.push({ id, u, n: cl(p?.n, 60), r: rank });
+    if (!rk.includes(rank)) rk.push(rank);
+  }
+  const ranks = rk.slice(0, 60), logos = {};
+  for (const k of ranks) { const v = r?.logos?.[k]; if (typeof v === "string" && v.length <= 60000 && LRE.test(v)) logos[k] = v; }
+  return { ranks, people, logos };
+}
 function sanitize(v) {
   if (!v || !Array.isArray(v.ranks) || !Array.isArray(v.wings) || !v.depts || typeof v.depts !== "object") throw new Error("bad");
   const wings = [...new Set(v.wings.map(w => cl(w)).filter(w => w && w !== "*"))].slice(0, 30);
@@ -59,6 +108,7 @@ function sanitize(v) {
     const d = d0 || {}, b = DEPTS[k], mg = b ? b[1] : !!d.mg;
     const o = { title: b ? b[0] : (cl(d.title, 40) || "Department"), mg: mg ? 1 : 0 };
     for (const f of ["cmd", "cmdUnit", "dep", "depUnit"]) o[f] = cl(d[f]);
+    o.roles = [0, 1, 2].map(i => cl(d.roles?.[i], 40));
     if (!b) {
       o.desc = cl(d.desc, 120);
       o.color = /^#[0-9a-f]{6}$/i.test(d.color) ? d.color : "#e8cf55";
@@ -68,8 +118,8 @@ function sanitize(v) {
     o.mgmtList = mg ? (Array.isArray(d.mgmtList) && d.mgmtList.length ? d.mgmtList : [{}]).slice(0, 12).map(m => ({ n: cl(m?.n), u: cl(m?.u) })) : [];
     depts[k] = o;
   }
-  const news = (Array.isArray(v.news) ? v.news : []).slice(0, 20).map(n => ({ t: cl(n?.t), b: cl(n?.b, 300), d: cl(n?.d, 20) })).filter(n => n.t);
-  return { wings, ranks, depts, news, updated: Date.now() };
+  const news = (Array.isArray(v.news) ? v.news : []).slice(0, 20).map(n => ({ t: cl(n?.t), b: clL(n?.b, 2000), d: cl(n?.d, 20), img: okImg(n?.img, 150000) })).filter(n => n.t);
+  return { wings, ranks, depts, news, roster: v.roster ? cleanRoster(v.roster) : undefined, proto: v.proto ? cleanProto(v.proto) : undefined, wanted: Array.isArray(v.wanted) ? cleanWanted(v.wanted) : undefined, secs: v.secs ? cleanSecs(v.secs) : undefined, cmds: Array.isArray(v.cmds) ? cleanCards(v.cmds, "t") : undefined, cars: Array.isArray(v.cars) ? cleanCards(v.cars, "r") : undefined, updated: Date.now() };
 }
 
 export default async (req, ctx) => {
@@ -115,9 +165,15 @@ export default async (req, ctx) => {
     if (m === "GET" && path === "audit") return J({ log: (await st.get("audit", { type: "json" })) || [] });
     if (m === "PUT" && path === "data") {
       if (!same(req.headers.get("x-csrf") || "", s.c)) return J({ error: "forbidden" }, 403);
-      let next; try { next = sanitize(await body(req, 2000000)); } catch { return J({ error: "invalid data" }, 400); }
+      let next; try { next = sanitize(await body(req, 5500000)); } catch { return J({ error: "invalid data" }, 400); }
       const old = await st.get("data", { type: "json" });
-      const ch = ["wings", "ranks", "depts", "news"].filter(k => JSON.stringify(old?.[k]) !== JSON.stringify(next[k]));
+      if (!next.roster && old?.roster) next.roster = old.roster;
+      if (!next.proto && old?.proto) next.proto = old.proto;
+      if (!next.wanted && old?.wanted) next.wanted = old.wanted;
+      if (!next.cmds && old?.cmds) next.cmds = old.cmds;
+      if (!next.cars && old?.cars) next.cars = old.cars;
+      if (old?.secs || next.secs) next.secs = { ...(old?.secs || {}), ...(next.secs || {}) };
+      const ch = ["wings", "ranks", "depts", "news", "roster", "proto", "wanted", "secs", "cmds", "cars"].filter(k => JSON.stringify(old?.[k]) !== JSON.stringify(next[k]));
       await st.setJSON("data", next);
       if (ch.length) await log(st, "Updated: " + ch.join(", "));
       return J({ ok: true });
