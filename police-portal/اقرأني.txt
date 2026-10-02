@@ -1,0 +1,17 @@
+تحديث الموقع على Netlify (الموقع شغال عندك، هذا تحديث فقط)
+
+بنية المجلد (لا تغيّرها):
+  public/index.html
+  public/404.html
+  public/og-banner.png   <- صورة البانر التي تظهر عند إرسال الرابط في ديسكورد (og.png نسخة قديمة، تتركها أو تحذفها)
+  netlify/functions/api.mjs
+  netlify.toml
+  package.json
+
+1) ارفع المجلد كاملاً بنفس الطريقة التي رفعت بها المرة السابقة (netlify deploy --prod أو GitHub).
+2) متغيرا ADMIN_PASSWORD و SESSION_SECRET موجودان أصلاً في إعدادات الموقع، لا تحتاج تغييرهما.
+3) بانر ديسكورد: ديسكورد يحفظ نسخة قديمة من المعاينة. إذا لم يظهر البانر مباشرة،
+   أرسل الرابط مع إضافة ?v=3 في آخره (مثال: https://policewebsite.netlify.app/?v=3).
+
+4) للتأكد قبل ما ترسل الرابط: افتح https://policewebsite.netlify.app/og-banner.png في المتصفح. لازم تشوف صورة البانر.
+   إذا ظهرت لك صفحة 404 فالملف ما انرفع داخل مجلد public.
