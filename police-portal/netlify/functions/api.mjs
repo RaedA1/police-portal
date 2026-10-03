@@ -63,7 +63,7 @@ const okImg = (x, m) => typeof x === "string" && x.length <= m && LRE.test(x) ? 
 function cleanCards(arr, f) {
   return (Array.isArray(arr) ? arr : []).slice(0, 30).map(x => ({
     id: /^[a-z0-9]{1,16}$/i.test(x?.id) ? x.id : "c" + Math.random().toString(36).slice(2, 10),
-    n: cl(x?.n, 60), [f]: cl(x?.[f], 60), img: okImg(x?.img, 150000),
+    n: cl(x?.n, 60), pid: okId(x?.pid), [f]: cl(x?.[f], 60), img: okImg(x?.img, 150000),
   })).filter(x => x.n);
 }
 function cleanRT(o) {
@@ -71,6 +71,7 @@ function cleanRT(o) {
   for (const [k, v] of Object.entries(o).slice(0, 80)) { const kk = cl(k, 40), vv = cl(v, 40); if (kk && vv) r[kk] = vv; }
   return r;
 }
+const okId = x => typeof x === "string" && /^[a-z0-9]{1,16}$/i.test(x) ? x : "";
 const SECK = ["articles", "fines", "outfits"];
 function cleanSecs(o) {
   const out = {};
@@ -113,6 +114,7 @@ function sanitize(v) {
     const d = d0 || {}, b = DEPTS[k], mg = b ? b[1] : !!d.mg;
     const o = { title: b ? b[0] : (cl(d.title, 40) || "Department"), mg: mg ? 1 : 0 };
     for (const f of ["cmd", "cmdUnit", "dep", "depUnit"]) o[f] = cl(d[f]);
+    o.cmdId = okId(d.cmdId); o.depId = okId(d.depId);
     o.roles = [0, 1, 2].map(i => cl(d.roles?.[i], 40));
     if (!b) {
       o.desc = cl(d.desc, 120);
@@ -120,7 +122,7 @@ function sanitize(v) {
       o.roles = [0, 1, 2].map(i => cl(d.roles?.[i], 40));
       o.logo = typeof d.logo === "string" && d.logo.length <= 150000 && /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+\/=]+$/.test(d.logo) ? d.logo : "";
     }
-    o.mgmtList = mg ? (Array.isArray(d.mgmtList) && d.mgmtList.length ? d.mgmtList : [{}]).slice(0, 12).map(m => ({ n: cl(m?.n), u: cl(m?.u) })) : [];
+    o.mgmtList = mg ? (Array.isArray(d.mgmtList) && d.mgmtList.length ? d.mgmtList : [{}]).slice(0, 12).map(m => ({ n: cl(m?.n), u: cl(m?.u), id: okId(m?.id) })) : [];
     depts[k] = o;
   }
   const news = (Array.isArray(v.news) ? v.news : []).slice(0, 20).map(n => ({ t: cl(n?.t), b: clL(n?.b, 2000), d: cl(n?.d, 20), img: okImg(n?.img, 150000) })).filter(n => n.t);
