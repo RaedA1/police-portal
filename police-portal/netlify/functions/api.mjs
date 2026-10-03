@@ -131,11 +131,12 @@ function sanitize(v) {
   for (const [k, d0] of Object.entries(v.depts).slice(0, 12)) {
     if (!/^[a-z0-9_]{1,24}$/.test(k)) continue;
     const d = d0 || {}, b = DEPTS[k], mg = b ? b[1] : !!d.mg;
-    const o = { title: b ? b[0] : (cl(d.title, 40) || "Department"), mg: mg ? 1 : 0 };
+    const o = { title: b ? b[0] : (cl(d.title, 40) || cl(d.titleAr, 40) || "Department"), mg: mg ? 1 : 0 };
     for (const f of ["cmd", "cmdUnit", "dep", "depUnit"]) o[f] = cl(d[f]);
     o.cmdId = okId(d.cmdId); o.depId = okId(d.depId); o.custom = cleanCustom(d.custom);
     o.roles = [0, 1, 2].map(i => cl(d.roles?.[i], 40));
     if (!b) {
+      o.titleAr = cl(d.titleAr, 40); o.descAr = cl(d.descAr, 120);
       o.desc = cl(d.desc, 120);
       o.color = /^#[0-9a-f]{6}$/i.test(d.color) ? d.color : "#e8cf55";
       o.roles = [0, 1, 2].map(i => cl(d.roles?.[i], 40));
