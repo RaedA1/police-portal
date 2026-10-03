@@ -72,6 +72,10 @@ function cleanRT(o) {
   return r;
 }
 const okId = x => typeof x === "string" && /^[a-z0-9]{1,16}$/i.test(x) ? x : "";
+const cleanCustom = arr => (Array.isArray(arr) ? arr : []).slice(0, 8).map(g => ({
+  t: cl(g?.t, 40),
+  list: (Array.isArray(g?.list) ? g.list : []).slice(0, 12).map(m => ({ n: cl(m?.n), u: cl(m?.u), id: okId(m?.id) })),
+})).filter(g => g.t);
 const SECK = ["articles", "fines", "outfits"];
 function cleanSecs(o) {
   const out = {};
@@ -114,7 +118,7 @@ function sanitize(v) {
     const d = d0 || {}, b = DEPTS[k], mg = b ? b[1] : !!d.mg;
     const o = { title: b ? b[0] : (cl(d.title, 40) || "Department"), mg: mg ? 1 : 0 };
     for (const f of ["cmd", "cmdUnit", "dep", "depUnit"]) o[f] = cl(d[f]);
-    o.cmdId = okId(d.cmdId); o.depId = okId(d.depId);
+    o.cmdId = okId(d.cmdId); o.depId = okId(d.depId); o.custom = cleanCustom(d.custom);
     o.roles = [0, 1, 2].map(i => cl(d.roles?.[i], 40));
     if (!b) {
       o.desc = cl(d.desc, 120);
