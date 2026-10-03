@@ -76,6 +76,21 @@ const cleanCustom = arr => (Array.isArray(arr) ? arr : []).slice(0, 8).map(g => 
   t: cl(g?.t, 40),
   list: (Array.isArray(g?.list) ? g.list : []).slice(0, 12).map(m => ({ n: cl(m?.n), u: cl(m?.u), id: okId(m?.id) })),
 })).filter(g => g.t);
+function cleanPerm(p) {
+  const cols = (Array.isArray(p?.cols) ? p.cols : []).slice(0, 16).map(x => cl(x, 40) || "—");
+  return {
+    cols,
+    rows: (Array.isArray(p?.rows) ? p.rows : []).slice(0, 30).map(r => ({ r: cl(r?.r, 40), all: clL(r?.all, 400), c: cols.map((_, i) => (r?.c?.[i] ? 1 : 0)) })).filter(r => r.r),
+    details: (Array.isArray(p?.details) ? p.details : []).slice(0, 30).map(d => ({ t: cl(d?.t, 60), d: clL(d?.d, 800) })).filter(d => d.t),
+  };
+}
+function cleanItems(arr) {
+  return (Array.isArray(arr) ? arr : []).slice(0, 80).map(x => ({
+    id: /^[a-z0-9]{1,16}$/i.test(x?.id) ? x.id : "i" + Math.random().toString(36).slice(2, 10),
+    lv: [1, 2, 3].includes(+x?.lv) ? +x.lv : 1, n: cl(x?.n, 60),
+    ty: ["legal", "semi", "illegal"].includes(x?.ty) ? x.ty : "semi", c: clL(x?.c, 300), img: okImg(x?.img, 60000),
+  })).filter(x => x.n);
+}
 const SECK = ["articles", "fines", "outfits"];
 function cleanSecs(o) {
   const out = {};
@@ -130,7 +145,7 @@ function sanitize(v) {
     depts[k] = o;
   }
   const news = (Array.isArray(v.news) ? v.news : []).slice(0, 20).map(n => ({ t: cl(n?.t), b: clL(n?.b, 2000), d: cl(n?.d, 20), img: okImg(n?.img, 150000) })).filter(n => n.t);
-  return { wings, ranks, depts, news, roster: v.roster ? cleanRoster(v.roster) : undefined, proto: v.proto ? cleanProto(v.proto) : undefined, wanted: Array.isArray(v.wanted) ? cleanWanted(v.wanted) : undefined, secs: v.secs ? cleanSecs(v.secs) : undefined, rtitles: v.rtitles && typeof v.rtitles === "object" && !Array.isArray(v.rtitles) ? cleanRT(v.rtitles) : undefined, cmds: Array.isArray(v.cmds) ? cleanCards(v.cmds, "t") : undefined, cars: Array.isArray(v.cars) ? cleanCards(v.cars, "r") : undefined, updated: Date.now() };
+  return { wings, ranks, depts, news, roster: v.roster ? cleanRoster(v.roster) : undefined, proto: v.proto ? cleanProto(v.proto) : undefined, wanted: Array.isArray(v.wanted) ? cleanWanted(v.wanted) : undefined, secs: v.secs ? cleanSecs(v.secs) : undefined, perm: v.perm && typeof v.perm === "object" && Array.isArray(v.perm.cols) ? cleanPerm(v.perm) : undefined, items: Array.isArray(v.items) ? cleanItems(v.items) : undefined, rtitles: v.rtitles && typeof v.rtitles === "object" && !Array.isArray(v.rtitles) ? cleanRT(v.rtitles) : undefined, cmds: Array.isArray(v.cmds) ? cleanCards(v.cmds, "t") : undefined, cars: Array.isArray(v.cars) ? cleanCards(v.cars, "r") : undefined, updated: Date.now() };
 }
 
 export default async (req, ctx) => {
@@ -184,8 +199,10 @@ export default async (req, ctx) => {
       if (!next.cmds && old?.cmds) next.cmds = old.cmds;
       if (!next.cars && old?.cars) next.cars = old.cars;
       if (!next.rtitles && old?.rtitles) next.rtitles = old.rtitles;
+      if (!next.perm && old?.perm) next.perm = old.perm;
+      if (!next.items && old?.items) next.items = old.items;
       if (old?.secs || next.secs) next.secs = { ...(old?.secs || {}), ...(next.secs || {}) };
-      const ch = ["wings", "ranks", "depts", "news", "roster", "proto", "wanted", "secs", "cmds", "cars", "rtitles"].filter(k => JSON.stringify(old?.[k]) !== JSON.stringify(next[k]));
+      const ch = ["wings", "ranks", "depts", "news", "roster", "proto", "wanted", "secs", "cmds", "cars", "rtitles", "perm", "items"].filter(k => JSON.stringify(old?.[k]) !== JSON.stringify(next[k]));
       await st.setJSON("data", next);
       if (ch.length) await log(st, "Updated: " + ch.join(", "));
       return J({ ok: true });
