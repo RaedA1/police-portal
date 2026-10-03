@@ -345,28 +345,47 @@ main:has(.adm){max-width:1280px}
 .adm-g{display:none}.adm-nav button{flex:none;white-space:nowrap;border-inline-start:0;border-bottom:3px solid transparent;padding:9px 14px}
 .adm-nav button[aria-current=page]{border-bottom-color:var(--ac)}}
 .drow select{width:100%}
-.pt{width:100%;border-collapse:collapse;min-width:820px}
-.pt th,.pt td{border:1px solid var(--line);padding:12px 14px;text-align:center;vertical-align:middle}
-.pt thead th{background:linear-gradient(90deg,color-mix(in srgb,var(--ac) 16%,var(--bg2)),var(--bg2));font-weight:800;border-bottom:2px solid var(--ac)}
-.pt th.pl{background:var(--bg2);white-space:nowrap}
-.pt tbody tr:hover td{background:color-mix(in srgb,var(--ac) 7%,transparent)}
-.pt .pn{display:inline-grid;margin:0 0 6px;margin-inline:auto;display:flex;justify-content:center}
 .pn{background:var(--ac);color:#0a0e14;border-radius:999px;min-width:24px;height:24px;display:inline-grid;place-items:center;font-size:.8rem;font-weight:800;padding:0 6px}
-.pall{text-align:start!important;line-height:1.9;color:var(--mu)}
-.ptx{text-align:start!important;line-height:1.9;min-width:260px}
-.pd th.pl{width:200px}
-.ck{display:inline-grid;place-items:center;width:24px;height:24px;border:2px solid var(--line);border-radius:6px;font-weight:900;font-size:.95rem}
-.ck.on{background:var(--ac);border-color:var(--ac);color:#0a0e14}
-.ish{margin:26px 0 12px;font-size:1.4rem;text-align:center}
+.pcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.pcd{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.pcd h3{margin:0;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:1.2rem;background:linear-gradient(90deg,color-mix(in srgb,var(--ac) 16%,var(--bg2)),var(--bg2));border-bottom:2px solid var(--ac)}
+.pcd h3 small{background:var(--ac);color:#0a0e14;border-radius:999px;padding:2px 12px;font-size:.8rem;font-weight:800}
+.pchips{display:flex;flex-wrap:wrap;gap:8px;padding:18px 20px 22px}
+.pchip{padding:7px 13px;border-radius:999px;font-size:.9rem;font-weight:600;background:color-mix(in srgb,var(--ac) 14%,transparent);border:1px solid color-mix(in srgb,var(--ac) 40%,var(--line))}
+.pnote{grid-column:1/-1}.pnote p{margin:0;padding:18px 22px;line-height:2;color:var(--mu)}
+.accs{display:grid;gap:12px;max-width:960px;margin-inline:auto}
+.acc{background:var(--pan);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:border-color .3s}
+.acc[open]{border-color:var(--ac)}
+.acc summary{cursor:pointer;list-style:none;padding:16px 20px;font-weight:800;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font-size:1.5rem;line-height:1;color:var(--ac);transition:transform .3s}
+.acc[open] summary::after{transform:rotate(45deg)}
+.acc p{margin:0;padding:0 20px 20px;line-height:2;color:var(--mu);animation:fi .35s}
+.itool{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:8px}
+.itool .rs{flex:1 1 240px;max-width:420px;margin:0}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{all:unset;box-sizing:border-box;cursor:pointer;padding:9px 18px;border-radius:999px;border:1px solid var(--line);font-weight:700;color:var(--mu);transition:all .25s}
+.chip:hover{color:var(--tx);border-color:var(--ac)}
+.chip[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:#0a0e14}
+.ish{margin:28px 0 14px;font-size:1.35rem}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.icd{padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.ich{display:flex;align-items:center;gap:14px}.ich h3{margin:0;font-size:1.1rem;line-height:1.5}
+.icd .ico{width:52px;height:52px;flex:none;display:grid;place-items:center;border-radius:12px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
+.icd .ico img{width:100%;height:100%;object-fit:contain}.icd .ico span{font-size:1.5rem;opacity:.4}
+.itg{display:flex;gap:10px;flex-wrap:wrap}
+.itg span{padding:4px 12px;border-radius:999px;font-size:.85rem;background:color-mix(in srgb,currentColor 14%,transparent);border:1px solid color-mix(in srgb,currentColor 35%,transparent)}
+.icn{margin:0;color:var(--mu);line-height:1.9;font-size:.95rem}.icn b{display:block;color:var(--tx);font-size:.8rem;margin-bottom:2px}
 .lv{font-weight:800;white-space:nowrap}.l1{color:#f08a24}.l2{color:#f5c02e}.l3{color:#e5484d}
 .ty{font-weight:800}.ty.legal{color:#3ecf6a}.ty.semi{color:#f08a24}.ty.illegal{color:#e5484d}
-.pin{font-weight:700}
-.ico{width:84px}.ico img{width:52px;height:52px;object-fit:contain;display:block;margin:auto}.ico span{font-size:1.6rem;opacity:.35}
 .prow{display:flex;gap:8px;align-items:center;margin-top:8px}.prow input{flex:1}
 .prk{margin-top:12px;padding:16px!important;background:var(--bg2)}
 .pgrid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .pcb{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--bg)}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.fab{position:fixed;left:22px;bottom:22px;z-index:60;padding:14px 28px;border-radius:999px;border:0;cursor:pointer;font:inherit;font-weight:800;font-size:1rem;background:var(--ac);color:#0a0e14;box-shadow:0 10px 30px -6px #000c,0 0 0 4px color-mix(in srgb,var(--ac) 25%,transparent);transition:transform .2s,box-shadow .2s}
+.fab:hover{transform:translateY(-3px)}.fab:active{transform:scale(.95)}
+@media(max-width:860px){.fab{bottom:calc(78px + env(safe-area-inset-bottom,0px));left:14px;padding:12px 22px}}
 </style>
 <meta name="theme-color" content="#050b1a">
 <meta name="description" content="Los Santos Police Department portal: promotion requirements, personnel table, radio protocols, violations book and wanted list.">
@@ -390,7 +409,7 @@ main:has(.adm){max-width:1280px}
 </div></header>
 <main id="app"></main>
 <div class="bnav"><a href="#home" data-r="home"><i>⌂</i><span>Home</span></a><a href="#roster" data-r="roster"><i>▦</i><span>Link</span></a><a href="#protocols" data-r="protocols"><i>☎</i><span>Protocols</span></a><a href="#wanted" data-r="wanted"><i>◉</i><span>Wanted</span></a></div>
-<footer><div class="mb"><span class="mbl">Made By:</span><strong class="mbn"><span>BROOF CHANDLER</span><span class="sep"> - </span><span>Rick Oliver</span></strong></div></footer>
+
 <div id="toast" role="status" aria-live="polite"></div>
 <dialog id="dlg"><div class="dic" aria-hidden="true">&#9888;</div><p id="dmsg"></p><div class="dbt"><button class="btn ghost" id="dno">Cancel</button><button class="btn danger" id="dyes">Confirm</button></div></dialog>
 
@@ -786,7 +805,9 @@ const track=()=>{try{return JSON.parse(localStorage.getItem("portal.track")||"{}
 const setTrack=t=>{try{localStorage.setItem("portal.track",JSON.stringify(t))}catch(e){}};
 const BK=["academy","affairs","wings"];
 const logoOf=k=>DL[k]||(DB.depts[k]&&DB.depts[k].logo)||"";
-const descOf=k=>DESC[k]||(DB.depts[k]&&DB.depts[k].desc)||"";
+const descOf=k=>DESC[k]||(DB.depts[k]&&((document.documentElement.lang==="ar"&&DB.depts[k].descAr)||DB.depts[k].desc))||"";
+const dn=v=>(document.documentElement.lang==="ar"&&v.titleAr)||v.title;
+const lead=(d,k)=>document.documentElement.lang==="ar"&&d.titleAr&&!BK.includes(k)?"قيادة "+esc(d.titleAr):esc(d.title)+" Leadership";
 const rolesOf=k=>{const d=DB.depts[k]||{},r=d.roles||[],b=ROLES[k];if(b)return[r[0]||b[0],r[1]||b[1],b[2]?(r[2]||b[2]):""];return[r[0]||"Commander",r[1]||"Deputy",d.mg?(r[2]||"Management"):""]};
 const colorOf=k=>({academy:"#d64550",affairs:"#3f8cff",wings:"#d4a93c"})[k]||(DB.depts[k]&&DB.depts[k].color)||"#e8cf55";
 function applyTheme(k){const r=document.documentElement,d=k&&DB.depts[k];
@@ -850,7 +871,7 @@ applyNav();
 function pTitles(){const m=DB.rtitles||{},G=[];
 DB.roster.ranks.forEach(r=>{const t=(m[r]||"").trim(),l=G[G.length-1];if(l&&l.t===t)l.r.push(r);else G.push({t,r:[r]})});
 app.innerHTML=`<h2>Rank Titles</h2><div class="tgrid" translate="no">${G.map(g=>`<section class="card tcard"><h3${g.t?"":' class="sm"'}>${g.t?esc(g.t):T("Same as the rank name")}</h3><ul>${g.r.map(r=>`<li>${esc(r)}</li>`).join("")}</ul></section>`).join("")||`<p class="mu">&mdash;</p>`}</div>`}
-function tTitles(){const rk=DB.roster.ranks,m=DB.rtitles||{},opt=d=>rk.map((x,i)=>`<option value="${i}"${i===d?" selected":""}>${esc(x)}</option>`).join("");
+function tTitles(){ASAVE=()=>$("#sv").click();const rk=DB.roster.ranks,m=DB.rtitles||{},opt=d=>rk.map((x,i)=>`<option value="${i}"${i===d?" selected":""}>${esc(x)}</option>`).join("");
 $("#tb").innerHTML=`<div class="card"><p class="mu">Set a title for each rank. Leave empty to use the rank name.</p>
 <div class="form" style="margin-top:14px;align-items:end"><label class="f">From rank<select id="rf">${opt(0)}</select></label><label class="f">To rank<select id="rt">${opt(rk.length-1)}</select></label><label class="f">Title<input id="rv" maxlength="40"></label><div><button class="btn ghost sm" id="ra">Apply to range</button></div></div></div>
 <div class="card" style="margin-top:16px"><div class="sw"><table class="tbl"><thead><tr><th>#</th><th>Rank</th><th>Title</th></tr></thead><tbody translate="no">${rk.map((r,i)=>`<tr><td data-l="#">${i+1}</td><td data-l="Rank">${esc(r)}</td><td data-l="Title"><input data-rt="${i}" maxlength="40" value="${esc(m[r]||"")}" placeholder="${T("Same as the rank name")}"></td></tr>`).join("")}</tbody></table></div><button class="btn sm" id="sv" style="margin-top:16px">Save</button></div>`;
@@ -859,11 +880,20 @@ $("#sv").onclick=()=>{const o={};app.querySelectorAll("[data-rt]").forEach(i=>{c
 /* ---------- Rank Permissions & Prohibited Items ---------- */
 const TYL={legal:"Legal",semi:"Semi-legal",illegal:"Illegal"};
 function pPerms(){const P=DB.perm,n=P.cols.length;
-app.innerHTML=`<h2>Police Rank Permissions</h2><div class="card" style="padding:0"><div class="sw"><table class="pt" translate="no"><thead><tr><th class="pl">${T("Permissions")}</th>${P.cols.map((c,i)=>`<th><span class="pn">${i+1}</span>${esc(c)}</th>`).join("")}</tr></thead><tbody>${P.rows.map(r=>r.all?`<tr><th class="pl">${esc(r.r)}</th><td colspan="${n}" class="pall">${esc(r.all)}</td></tr>`:`<tr><th class="pl">${esc(r.r)}</th>${P.cols.map((_,i)=>`<td><span class="ck${r.c[i]?" on":""}" role="img" aria-label="${r.c[i]?"yes":"no"}">${r.c[i]?"&#10003;":""}</span></td>`).join("")}</tr>`).join("")}</tbody></table></div></div>
-<h2 class="ah">${T("Permission Details")}</h2><div class="card" style="padding:0"><div class="sw"><table class="pt pd" translate="no"><thead><tr><th>${T("Permission")}</th><th>${T("Rules")}</th></tr></thead><tbody>${P.details.map(d=>`<tr><th class="pl">${esc(d.t)}</th><td class="ptx">${esc(d.d)}</td></tr>`).join("")}</tbody></table></div></div>`}
-function pItems(){const A=DB.items,sec=(h,rs)=>rs.length?`<h3 class="ish">${h}</h3><div class="card" style="padding:0;margin-bottom:22px"><div class="sw"><table class="pt" translate="no"><thead><tr><th>${T("Class")}</th><th>${T("Item")}</th><th>${T("Item name")}</th><th>${T("Type")}</th><th>${T("Seizure cases")}</th></tr></thead><tbody>${rs.map(x=>`<tr><td class="lv l${x.lv}">${T("Tier "+x.lv)}</td><td class="ico">${x.img?`<img src="${x.img}" alt="">`:`<span aria-hidden="true">&#9671;</span>`}</td><td class="pin">${esc(x.n)}</td><td class="ty ${x.ty}">${T(TYL[x.ty])}</td><td class="ptx">${esc(x.c)}</td></tr>`).join("")}</tbody></table></div></div>`:"";
-app.innerHTML=`<h2>Police Prohibited Items</h2>${sec(`<span class="ty legal">${T("Legal")}</span> - <span class="ty semi">${T("Semi-legal")}</span>`,A.filter(x=>x.ty!=="illegal"))}${sec(`<span class="ty illegal">${T("Illegal")}</span>`,A.filter(x=>x.ty==="illegal"))}`}
-function tPerms(){const P=DB.perm,t=$("#tb"),zero=()=>P.cols.map(()=>0);
+const cards=P.rows.map(r=>{if(r.all)return`<article class="card pcd pnote" translate="no"><h3>${esc(r.r)}</h3><p>${esc(r.all)}</p></article>`;
+const g=P.cols.filter((_,i)=>r.c[i]);
+return`<article class="card pcd" translate="no"><h3><span>${esc(r.r)}</span><small>${g.length}/${n}</small></h3><div class="pchips">${g.map(c=>`<span class="pchip">&#10003; ${esc(c)}</span>`).join("")||`<span class="mu">&mdash;</span>`}</div></article>`}).join("");
+app.innerHTML=`<h2>Police Rank Permissions</h2><div class="pcg">${cards}</div><h2 class="ah">${T("Permission Details")}</h2><div class="accs" translate="no">${P.details.map(d=>`<details class="acc"><summary>${esc(d.t)}</summary><p>${esc(d.d)}</p></details>`).join("")}</div>`}
+function pItems(){const A=DB.items;let q="",f="all";
+const card=x=>`<article class="card icd" translate="no"><div class="ich"><div class="ico">${x.img?`<img src="${x.img}" alt="">`:`<span aria-hidden="true">&#9671;</span>`}</div><h3>${esc(x.n)}</h3></div><div class="itg"><span class="lv l${x.lv}">${T("Tier "+x.lv)}</span><span class="ty ${x.ty}">${T(TYL[x.ty])}</span></div><p class="icn"><b>${T("Seizure cases")}</b>${esc(x.c)}</p></article>`;
+const sec=(h,rs)=>rs.length?`<h3 class="ish">${h}</h3><div class="igrid">${rs.map(card).join("")}</div>`:"";
+const chips=[["all","All"],["legal","Legal / Semi-legal"],["illegal","Illegal"]];
+app.innerHTML=`<h2>Police Prohibited Items</h2><div class="itool"><input id="iq" class="rs" type="search" placeholder="Search" aria-label="Search" maxlength="60" autocomplete="off"><div class="chips">${chips.map(c=>`<button type="button" class="chip" data-f="${c[0]}" aria-pressed="${c[0]==="all"}">${T(c[1])}</button>`).join("")}</div></div><div id="ib"></div>`;
+const draw=()=>{const L=A.filter(x=>!q||(x.n+" "+x.c).toLowerCase().includes(q));
+$("#ib").innerHTML=(f!=="illegal"?sec(`<span class="ty legal">${T("Legal")}</span> - <span class="ty semi">${T("Semi-legal")}</span>`,L.filter(x=>x.ty!=="illegal")):"")+(f!=="legal"?sec(`<span class="ty illegal">${T("Illegal")}</span>`,L.filter(x=>x.ty==="illegal")):"")||`<p class="mu">&mdash;</p>`};
+$("#iq").oninput=e=>{q=e.target.value.trim().toLowerCase();draw()};
+app.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{f=b.dataset.f;app.querySelectorAll("[data-f]").forEach(x=>x.setAttribute("aria-pressed",x===b));draw()});draw()}
+function tPerms(){ASAVE=()=>{collect();save();toast("Saved")};const P=DB.perm,t=$("#tb"),zero=()=>P.cols.map(()=>0);
 const grid=r=>P.cols.map((c,i)=>`<label class="pcb" title="${esc(c)}"><input type="checkbox" data-pc="${i}"${r.c[i]?" checked":""}><span>${i+1}</span></label>`).join("");
 const collect=()=>{const rows=[...t.querySelectorAll("[data-row]")];P.cols=[...t.querySelectorAll("[data-cn]")].map(e=>clean(e.value,40)||"—");
 P.rows=rows.map((el,k)=>{const o=P.rows[k]||{},a=el.querySelector("[data-all]");return{r:clean(el.querySelector("[data-rn]").value,40),all:a?cleanL(a.value,400):"",_m:!!a,c:P.cols.map((_,i)=>{const b=el.querySelector(`[data-pc="${i}"]`);return b&&b.checked?1:(b?0:(o.c&&o.c[i]?1:0))})}});
@@ -887,7 +917,7 @@ else if(a==="da"){if(P.details.length>=30)return toast("Maximum reached",1);P.de
 else if(a==="du"||a==="dd")mv(P.details,i,a==="du"?-1:1);
 else if(a==="dx"){if(!await confirmD("Delete this detail?"))return;P.details.splice(i,1)}
 render()};render()}
-function tItems(){const A=DB.items,TY=["legal","semi","illegal"],ac='accept="image/png,image/jpeg,image/webp"',t=$("#tb");
+function tItems(){ASAVE=()=>{A.forEach((x,i)=>Object.assign(x,rd(t.querySelector(`[data-cd="${i}"]`))));save();toast("Saved")};const A=DB.items,TY=["legal","semi","illegal"],ac='accept="image/png,image/jpeg,image/webp"',t=$("#tb");
 const opt=(arr,v,f)=>arr.map(x=>`<option value="${x}"${x==v?" selected":""}>${f(x)}</option>`).join("");
 const fields=x=>`<div class="form"><label class="f">${T("Item name")}<input data-f="n" maxlength="60" value="${esc(x.n)}"></label><label class="f">${T("Class")}<select data-f="lv">${opt([1,2,3],x.lv,v=>T("Tier "+v))}</select></label><label class="f">${T("Type")}<select data-f="ty">${opt(TY,x.ty,v=>T(TYL[v]))}</select></label></div><label class="f" style="margin-top:10px">${T("Seizure cases")}<input data-f="c" maxlength="300" value="${esc(x.c)}"></label><label class="f" style="margin-top:10px">Photo (optional)<input type="file" data-f="img" ${ac}></label>`;
 const rd=c=>({n:clean(c.querySelector('[data-f="n"]').value,60),lv:+c.querySelector('[data-f="lv"]').value||1,ty:c.querySelector('[data-f="ty"]').value,c:cleanL(c.querySelector('[data-f="c"]').value,300)});
@@ -911,7 +941,7 @@ function pCmds(){app.innerHTML=`<h2>Police Commanders</h2><div class="cgrid">${D
 function pCars(){app.innerHTML=`<h2>Police Vehicles</h2><div class="vgrid">${DB.cars.map(c=>`<article class="card vcard" translate="no"><div class="vimg">${c.img?`<img src="${c.img}" alt="${esc(c.n)}">`:`<span aria-hidden="true">&#128659;</span>`}</div><div class="vb"><h3>${esc(c.n)}</h3><span class="badge">${bdE(c.r)}</span></div></article>`).join("")||`<p class="mu">&mdash;</p>`}</div>`}
 async function readImg(f){if(!f)return"";for(const m of[900,600,400]){try{return await readLogo(f,m,150000)}catch(e){}}throw 0}
 function rosSel(){const R=DB.roster;return`<label class="f" style="grid-column:1/-1">Choose from police roster<select id="arp"><option value="">— New name —</option>${R.ranks.map(k=>{const ps=R.people.filter(p=>p.r===k&&p.n);return ps.length?`<optgroup label="${esc(k)}">${ps.map(p=>`<option value="${esc(p.id)}">${esc(p.n)} (${esc(p.u)})</option>`).join("")}</optgroup>`:""}).join("")}</select></label>`}
-function tCards(key,l1,l2,f2,mx){const CM=key==="cmds",A=DB[key],re=()=>tCards(key,l1,l2,f2,mx),ac='accept="image/png,image/jpeg,image/webp"';
+function tCards(key,l1,l2,f2,mx){ASAVE=()=>{A.forEach((_,i)=>col(i));save();toast("Saved")};const CM=key==="cmds",A=DB[key],re=()=>tCards(key,l1,l2,f2,mx),ac='accept="image/png,image/jpeg,image/webp"';
 const card=(x,i)=>`<div class="card" style="margin-bottom:14px" data-cd="${i}"><div class="form"><label class="f">${l1}${CM?rosterSelect('data-f="n"',x.pid,x.n,"",1):`<input data-f="n" maxlength="60" value="${esc(x.n)}">`}</label><label class="f">${l2}<input data-f="${f2}" maxlength="60" value="${esc(x[f2])}"${CM?` placeholder="${T("Rank (from the table)")}"`:""}></label><label class="f">Photo (optional)<input type="file" data-f="img" ${ac}></label></div>${x.img?`<img class="cth" src="${x.img}" alt="">`:""}<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button class="btn sm" data-a="sv" data-i="${i}">Save</button><button class="btn ghost sm" data-a="mu" data-i="${i}" aria-label="Up">&uarr;</button><button class="btn ghost sm" data-a="md" data-i="${i}" aria-label="Down">&darr;</button>${x.img?`<button class="btn ghost sm" data-a="rp" data-i="${i}">Remove photo</button>`:""}<button class="btn danger sm" data-a="dl" data-i="${i}">Delete</button></div></div>`;
 $("#tb").innerHTML=`<div class="card hl" style="margin-bottom:14px"><h3>Add</h3><div class="form" style="margin-top:12px">${key==="cmds"?rosSel():""}<label class="f">${l1}${CM?rosterSelect('id="an1"',"","","",1):`<input id="an1" maxlength="60">`}</label><label class="f">${l2}<input id="an2" maxlength="60"${CM?` placeholder="${T("Rank (from the table)")}"`:""}></label><label class="f">Photo (optional)<input id="an3" type="file" ${ac}></label></div><div class="err" id="ae"></div><button class="btn sm" data-a="ad">Add</button></div>`+A.map(card).join("");
 $("#tb").addEventListener("change",e=>{if(e.target.id!=="arp")return;const p=DB.roster.people.find(x=>x.id===e.target.value);if(p){$("#an1").value=clean(p.n,60);$("#an2").value=clean(p.r,60)}});
@@ -972,8 +1002,8 @@ em.wings='<svg class="emb" viewBox="0 0 64 64" fill="none" stroke="currentColor"
 const W=(id,n,u,role,c)=>{const p=id&&DB.roster.people.find(x=>x.id===id),w=p?{n:p.n,u:p.u}:{n,u};return P(role,w.n,w.u,c)};
 const P=(role,n,u,c)=>`<div class="pc ${c}"><div class="pav">${c==="top"?"★":c==="mid"?"☆":"⚑"}</div><div class="pi"><div class="mu" translate="no">${role}</div><h3>${esc(n)||"<span class=mu>Not assigned</span>"}</h3><div class="mu"><span>UNIT:</span> ${esc(u)||"-"}</div></div></div>`;
 app.innerHTML=`<h2>Departments</h2>
-<div class="dcards">${Object.entries(DB.depts).map(([k,v])=>`<button class="dc ${dept===k?"on":""}" data-d="${k}" style="--dcol:${colorOf(k)}" aria-pressed="${dept===k}">${logoOf(k)?`<img class="emb" src="${logoOf(k)}" alt="">`:(em[k]||em.affairs)}<h1>${esc(v.title)}</h1><p>${esc(descOf(k))}</p></button>`).join("")}</div>
-${d?`<section class="org"><h2>${logoOf(dept)?`<img class="oi" src="${logoOf(dept)}" alt="">`:""}${esc(d.title)} Leadership</h2>${W(d.cmdId,d.cmd,d.cmdUnit,rolesOf(dept)[0],"top")}${W(d.depId,d.dep,d.depUnit,rolesOf(dept)[1],"mid")}${(d.mgmtList||[]).length?`<div class="orow">${d.mgmtList.map(m=>W(m.id,m.n,m.u,rolesOf(dept)[2],"low")).join("")}</div>`:""}${(d.custom||[]).map(g=>`<div class="orow">${(g.list.length?g.list:[{id:"",n:"",u:""}]).map(m=>W(m.id,m.n,m.u,esc(g.t),"low")).join("")}</div>`).join("")}</section>`:`<p class="mu" style="margin-top:20px">Select a department to view its leadership.</p>`}`;
+<div class="dcards">${Object.entries(DB.depts).map(([k,v])=>`<button class="dc ${dept===k?"on":""}" data-d="${k}" style="--dcol:${colorOf(k)}" aria-pressed="${dept===k}">${logoOf(k)?`<img class="emb" src="${logoOf(k)}" alt="">`:(em[k]||em.affairs)}<h1>${esc(dn(v))}</h1><p>${esc(descOf(k))}</p></button>`).join("")}</div>
+${d?`<section class="org"><h2>${logoOf(dept)?`<img class="oi" src="${logoOf(dept)}" alt="">`:""}${lead(d,dept)}</h2>${W(d.cmdId,d.cmd,d.cmdUnit,rolesOf(dept)[0],"top")}${W(d.depId,d.dep,d.depUnit,rolesOf(dept)[1],"mid")}${(d.mgmtList||[]).length?`<div class="orow">${d.mgmtList.map(m=>W(m.id,m.n,m.u,rolesOf(dept)[2],"low")).join("")}</div>`:""}${(d.custom||[]).map(g=>`<div class="orow">${(g.list.length?g.list:[{id:"",n:"",u:""}]).map(m=>W(m.id,m.n,m.u,esc(g.t),"low")).join("")}</div>`).join("")}</section>`:`<p class="mu" style="margin-top:20px">Select a department to view its leadership.</p>`}`;
 app.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{dept=b.dataset.d;applyTheme(dept);pDept()})}
 /* ---------- Protocols ---------- */
 function pProtocols(){
@@ -983,7 +1013,7 @@ const draw=()=>{const q=$("#pq").value.trim().toLowerCase();
 $("#pg").innerHTML=DB.proto.sections.map(s=>{const rs=s.rows.filter(r=>!q||(r.a+" "+r.b+" "+r.c).toLowerCase().includes(q));if(!rs.length)return"";
 return`<h3 class="ph">${esc(s.t)}</h3><div class="psec${s.note?"":" nb"}"><div class="sw card"><table class="tbl ptb"><thead><tr>${L.slice(0,3).map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${rs.map(r=>`<tr><td class="n" data-l="${L[0]}">${bdE(r.a)}</td><td data-l="${L[1]}">${bdE(r.b)}</td><td data-l="${L[2]}">${bdE(r.c)}</td></tr>`).join("")}</tbody></table></div>${s.note?`<aside class="pbox"><div class="pt">${L[3]}</div><div class="ptx" dir="auto">${ntx(s.note)}</div></aside>`:""}</div>`}).join("")||`<p class="mu">—</p>`};
 $("#pq").oninput=draw;draw()}
-function tProto(){const P=DB.proto.sections;
+function tProto(){const P=DB.proto.sections;ASAVE=()=>{P.forEach((_,i)=>col(i));save();toast("Saved")};
 const col=i=>{const c=$(`[data-sec="${i}"]`),s=P[i],v=(tr,k)=>clean(tr.querySelector(`[data-r="${k}"]`).value,k==="a"?40:k==="b"?60:120);
 s.t=clean(c.querySelector('[data-f="t"]').value,60)||s.t;s.note=clean(c.querySelector('[data-f="note"]').value,200);s.rows=[...c.querySelectorAll("tbody tr")].map(tr=>({a:v(tr,"a"),b:v(tr,"b"),c:v(tr,"c")}))};
 const ip=(k,v,m)=>`<input data-r="${k}" maxlength="${m}" value="${esc(v)}">`;
@@ -1034,7 +1064,7 @@ function pWanted(){app.innerHTML=`<h2>Wanted</h2><div class="rbar"><input id="wq
 const all=DB.wanted,LV={low:"Low",medium:"Medium",high:"High"},draw=()=>{const q=$("#wq").value.trim().toLowerCase(),st=$("#wf").value,f=all.filter(x=>(!st||x.s===st)&&(!q||(x.n+" "+x.j+" "+x.d+" "+x.l).toLowerCase().includes(q)));
 $("#wg").innerHTML=f.length?f.map(x=>`<article class="card wcard${x.s==="arrested"?" arr":""}">${x.img?`<img class="wimg" src="${x.img}" alt="">`:`<div class="wimg no">?</div>`}<div class="wb"><h3 translate="no">${esc(x.n)}</h3><div class="chipset" style="margin:0 0 8px"><span class="wchip st2 ${x.s}">${T(x.s==="arrested"?"Arrested":"At large")}</span>${x.k?`<span class="wchip dg ${x.k}">${T("Danger")}: ${T(LV[x.k])}</span>`:""}</div>${x.j?`<span class="badge" translate="no">${esc(x.j)}</span>`:""}${x.l?`<p class="mu" translate="no">📍 ${esc(x.l)}</p>`:""}${x.r?`<p class="rw" translate="no">💰 ${esc(x.r)}</p>`:""}${x.d?`<p class="mu" translate="no">${esc(x.d)}</p>`:""}</div></article>`).join(""):`<p class="mu">${all.length?"—":T("No wanted persons at the moment.")}</p>`};
 $("#wq").oninput=draw;$("#wf").onchange=draw;draw()}
-function tWanted(){const W=DB.wanted;
+function tWanted(){const W=DB.wanted;ASAVE=()=>{W.forEach((x,i)=>Object.assign(x,rd(app.querySelector(`[data-w="${i}"]`))));save();toast("Saved")};
 const ex=(a,x)=>`<label class="f">Status<select ${a("s")}><option value="wanted"${x.s!=="arrested"?" selected":""}>At large</option><option value="arrested"${x.s==="arrested"?" selected":""}>Arrested</option></select></label><label class="f">Danger level<select ${a("k")}>${["","low","medium","high"].map(v=>`<option value="${v}"${x.k===v?" selected":""}>${v?v[0].toUpperCase()+v.slice(1):"—"}</option>`).join("")}</select></label><label class="f">Last seen<input ${a("l")} maxlength="80" value="${esc(x.l||"")}"></label><label class="f">Reward<input ${a("r")} maxlength="40" value="${esc(x.r||"")}"></label>`;
 $("#tb").innerHTML=`<div class="card hl" style="margin-bottom:14px"><h3>Add wanted person</h3><div class="form" style="margin-top:12px"><label class="f">Name<input id="wn1" maxlength="60"></label><label class="f">Job<input id="wj" maxlength="60"></label><label class="f">Details<textarea id="wd" maxlength="600" rows="3"></textarea></label>${ex(k=>`id="w${k}"`,{})}<label class="f">Photo (optional)<input id="wi" type="file" accept="image/png,image/jpeg,image/webp"></label></div><div class="err" id="we"></div><button class="btn" id="wa">Add</button></div>`+
 W.map((x,i)=>`<div class="card" style="margin-bottom:14px" data-w="${i}"><div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">${x.img?`<img class="wimg" style="width:96px;border-radius:6px" src="${x.img}" alt="">`:""}<div class="form" style="flex:1;min-width:220px"><label class="f">Name<input data-f="n" maxlength="60" value="${esc(x.n)}"></label><label class="f">Job<input data-f="j" maxlength="60" value="${esc(x.j)}"></label><label class="f">Details<textarea data-f="d" maxlength="600" rows="3">${esc(x.d)}</textarea></label>${ex(k=>`data-f="${k}"`,x)}</div></div>
@@ -1054,7 +1084,7 @@ const S=DB.secs[key].sections,draw=()=>{const q=$("#sq").value.trim().toLowerCas
 $("#sg").innerHTML=S.map(s=>{const rs=s.rows.filter(r=>!q||heads.some(h=>(r[h.k]||"").toLowerCase().includes(q)));if(!rs.length)return"";
 return`<section class="card rg"><h3 class="rh"><span>${esc(s.t)}</span></h3><div style="overflow-x:auto"><table class="tbl">${th?`<thead><tr>${heads.map(h=>`<th translate="no">${h.l}</th>`).join("")}</tr></thead>`:""}<tbody>${rs.map(r=>`<tr>${heads.map((h,i)=>`<td${i?"":' class="n"'}${h.ltr?' dir="ltr"':""} data-l="${h.l}">${bdE(r[h.k]||"")||"—"}</td>`).join("")}</tr>`).join("")}</tbody></table></div></section>`}).join("")||`<p class="mu">—</p>`};
 $("#sq").oninput=draw;draw()}
-function tSec(key,heads){const P=DB.secs[key].sections;
+function tSec(key,heads){const P=DB.secs[key].sections;ASAVE=()=>{P.forEach((_,i)=>col(i));save();toast("Saved")};
 const col=i=>{const c=$(`[data-sec="${i}"]`),s=P[i];s.t=clean(c.querySelector('[data-f="t"]').value,80)||s.t;if(key==="outfits")s.g=c.querySelector('[data-f="g"]').checked?"w":"";s.rows=[...c.querySelectorAll("tbody tr")].map(tr=>{const o={};heads.forEach(h=>o[h.k]=clean(tr.querySelector(`[data-r="${h.k}"]`).value,200));return o})};
 const ne=r=>heads.some(h=>r[h.k]);
 $("#tb").innerHTML=`<div class="card hl" style="margin-bottom:14px"><h3>Add section</h3><div class="form" style="margin-top:12px"><label class="f">Section title<input id="sn" maxlength="80"></label>${key==="outfits"?`<label class="f"><input type="checkbox" id="sg2"> Wings outfit</label>`:""}</div><button class="btn sm" data-a="sa">Add section</button></div>`+
@@ -1089,10 +1119,12 @@ app.innerHTML=`<div class="card" style="max-width:400px;margin:auto"><h2>Admin s
 $("#pw").onkeydown=e=>{if(e.key==="Enter")$("#go").click()};
 {const b=$("#eye"),p=$("#pw"),sv=s=>{p.type=s?"text":"password";b.setAttribute("aria-label",T(s?"Hide password":"Show password"));b.innerHTML=EYE[s]};sv(0);b.onclick=()=>sv(p.type==="password"?1:0)}
 $("#go").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password:$("#pw").value})});const j=await r.json().catch(()=>({}));if(r.ok&&j.ok){authed=true;csrf=j.csrf;adminUI()}else if(r.status===429)lockCount(+j.retryAfter||180);else if(r.status===500)$("#pe").textContent="Server is not configured.";else $("#pe").textContent="Incorrect password."}catch(e){$("#pe").textContent="Connection error."}}}
+let ASAVE=null;
 const ANAV=[["Personnel",[["ranks","Ranks","⬆"],["roster","Link","▦"],["titles","Rank Titles","✎"],["wings","Wings","✈"],["cmds","Commanders","★"]]],["Content",[["depts","Departments","⚑"],["proto","Protocols","☎"],["wanted","Wanted","◉"],["articles","Terms","§"],["fines","Violations","⚖"],["outfits","Outfits","▣"],["cars","Vehicles","◈"],["perms","Rank Permissions","✔"],["items","Prohibited Items","⊘"],["news","Announcements","✦"]]],["System",[["backup","Backup","⤓"],["log","Audit log","☰"]]]];
 function adminUI(){const cur=ANAV.flatMap(g=>g[1]).find(t=>t[0]===tab)||ANAV[0][1][0];
 app.innerHTML=`<div class="adm-top"><h2>Admin Panel</h2><button class="btn ghost sm" id="lo">Sign out</button></div>
-<div class="adm"><aside class="adm-nav" aria-label="Admin">${ANAV.map(g=>`<div class="adm-g">${g[0]}</div>`+g[1].map(t=>`<button type="button" data-tab="${t[0]}"${tab===t[0]?' aria-current="page"':""}><i aria-hidden="true">${t[2]}</i><span>${t[1]}</span></button>`).join("")).join("")}</aside><section class="adm-main"><h3 class="adm-h">${cur[1]}</h3><div id="tb"></div></section></div>`;
+<div class="adm"><aside class="adm-nav" aria-label="Admin">${ANAV.map(g=>`<div class="adm-g">${g[0]}</div>`+g[1].map(t=>`<button type="button" data-tab="${t[0]}"${tab===t[0]?' aria-current="page"':""}><i aria-hidden="true">${t[2]}</i><span>${t[1]}</span></button>`).join("")).join("")}</aside><section class="adm-main"><h3 class="adm-h">${cur[1]}</h3><div id="tb"></div></section></div><button type="button" class="fab" id="fab">&#10003; ${T("Save")}</button>`;
+ASAVE=()=>{save();toast("Saved")};$("#fab").onclick=()=>ASAVE&&ASAVE();
 $("#lo").onclick=async()=>{try{await fetch("/api/logout",{method:"POST"})}catch(e){}authed=false;csrf="";location.hash="#home"};
 app.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;adminUI()});
 const ac=app.querySelector("[aria-current]");ac&&ac.scrollIntoView({block:"nearest",inline:"center"});
@@ -1138,13 +1170,13 @@ app.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{const i=+b.dataset.r,
 if(e)return e!=="Cancelled"&&toast(e,1);if(!n||n===old)return;DB.wings[i]=n;DB.ranks.forEach(r=>r.wings=r.wings.map(w=>w===old?n:w));save();audit("Renamed wing "+old);toast("Wing renamed");tWings()});
 app.querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{const i=+b.dataset.x,w=DB.wings[i];if(await confirmD(`Delete wing "${w}"? It is removed from all ranks.`)){DB.wings.splice(i,1);DB.ranks.forEach(r=>r.wings=r.wings.filter(x=>x!==w));save();audit("Deleted wing "+w);toast("Wing deleted");tWings()}})}
 function collect(k){const d=DB.depts[k];
-if(app.querySelector(`[data-ck="${k}"]`)){const g=f=>{const e=app.querySelector(`[data-ck="${k}"][data-cf="${f}"]`);return e?clean(e.value,f==="desc"?120:40):""};
-d.roles=[g("r0"),g("r1"),g("r2")];if(!BK.includes(k)){d.title=g("title")||d.title;d.desc=g("desc");const c=app.querySelector(`[data-ck="${k}"][data-cf="color"]`);if(c&&/^#[0-9a-f]{6}$/i.test(c.value))d.color=c.value}}
+if(app.querySelector(`[data-ck="${k}"]`)){const g=f=>{const e=app.querySelector(`[data-ck="${k}"][data-cf="${f}"]`);return e?clean(e.value,(f==="desc"||f==="descAr")?120:40):""};
+d.roles=[g("r0"),g("r1"),g("r2")];if(!BK.includes(k)){d.title=g("title")||g("titleAr")||d.title;d.titleAr=g("titleAr");d.desc=g("desc");d.descAr=g("descAr");const c=app.querySelector(`[data-ck="${k}"][data-cf="color"]`);if(c&&/^#[0-9a-f]{6}$/i.test(c.value))d.color=c.value}}
 const pv=e=>{const v=e.value;if(!v)return{id:"",n:"",u:""};if(v==="~")return{id:"",n:clean(e.dataset.n),u:clean(e.dataset.u)};const p=DB.roster.people.find(x=>x.id===v);return p?{id:p.id,n:p.n,u:p.u}:{id:"",n:"",u:""}};
 app.querySelectorAll(`select[data-k="${k}"]`).forEach(e=>{const w=pv(e),f=e.dataset.f;d[f]=w.n;d[f+"Unit"]=w.u;d[f+"Id"]=w.id});
 d.mgmtList=[...app.querySelectorAll(`select[data-mk="${k}"]`)].map(e=>{const w=pv(e);return{n:w.n,u:w.u,id:w.id}});
 d.custom=[...app.querySelectorAll(`[data-xg^="${k}:"]`)].map(g=>({t:clean(g.querySelector("input").value,40),list:[...g.querySelectorAll("select")].map(e=>{const w=pv(e);return{n:w.n,u:w.u,id:w.id}})}))}
-function tDepts(){
+function tDepts(){ASAVE=()=>{Object.keys(DB.depts).forEach(k=>collect(k));save();toast("Saved")};
 const inp=(a,ph,v,m=80)=>`<input ${a} maxlength="${m}" placeholder="${ph}" aria-label="${ph}" value="${esc(v)}">`;
 const groups=(()=>{const g=new Map();rosterSorted().forEach(p=>{if(!g.has(p.r))g.set(p.r,[]);g.get(p.r).push(p)});return[...g]})();
 const pick=(a,id,n,u)=>{const P=DB.roster.people;let sel=id&&P.some(x=>x.id===id)?id:"",extra="";
@@ -1154,23 +1186,23 @@ const cust=k=>(DB.depts[k].custom||[]).map((g,i)=>`<div class="card xg" data-xg=
 const row=(lab,a,x)=>`<div class="drow"><div class="mu" translate="no">${lab}</div><div>${pick(a,x[2],x[0],x[1])}</div></div>`;
 const cf=(k,f,l,v,m)=>`<label class="f">${l}${inp(`data-ck="${k}" data-cf="${f}"`,l,v,m)}</label>`;
 const nf=(id,l,v,m)=>`<label class="f">${l}<input id="${id}" maxlength="${m}" value="${esc(v)}"></label>`;
-const add=`<div class="card hl" style="margin-bottom:14px"><h3>Add department</h3><div class="form" style="margin-top:12px">${nf("nd-t","Department name","",40)}${nf("nd-d","Description","",120)}${nf("nd-r0","Commander title","Commander",40)}${nf("nd-r1","Deputy title","Deputy",40)}${nf("nd-r2","Management title","Management",40)}
+const add=`<div class="card hl" style="margin-bottom:14px"><h3>Add department</h3><div class="form" style="margin-top:12px">${nf("nd-t","Department name (English)","",40)}${nf("nd-ta","Department name (Arabic)","",40)}${nf("nd-d","Description (English)","",120)}${nf("nd-da","Description (Arabic)","",120)}${nf("nd-r0","Commander title","Commander",40)}${nf("nd-r1","Deputy title","Deputy",40)}${nf("nd-r2","Management title","Management",40)}
 <label class="f">Color<input id="nd-c" type="color" value="#e8cf55"></label><label class="f">Logo (PNG, JPG or WebP)<input id="nd-l" type="file" accept="image/png,image/jpeg,image/webp"></label></div>
 <label class="f" style="margin-top:12px"><input type="checkbox" id="nd-m" checked> Has a Management list</label><div class="err" id="nd-e"></div><button class="btn" id="nd-a">Add department</button></div>`;
 $("#tb").innerHTML=`<p class="mu" style="margin-bottom:14px">${T("Names are taken from the Link table; edits there update here automatically.")}</p>`+add+Object.entries(DB.depts).map(([k,d])=>{const R=rolesOf(k),cu=!BK.includes(k);return`<div class="card" style="margin-bottom:14px"><h3>${esc(d.title)}</h3>
-<div class="form" style="margin:12px 0">${cu?cf(k,"title","Department name",d.title,40)+cf(k,"desc","Description",d.desc||"",120):""}${cf(k,"r0","Commander title",(d.roles||[])[0]||"",40)}${cf(k,"r1","Deputy title",(d.roles||[])[1]||"",40)}${R[2]?cf(k,"r2","Management title",(d.roles||[])[2]||"",40):""}
+<div class="form" style="margin:12px 0">${cu?cf(k,"title","Department name (English)",d.title,40)+cf(k,"titleAr","Department name (Arabic)",d.titleAr||"",40)+cf(k,"desc","Description (English)",d.desc||"",120)+cf(k,"descAr","Description (Arabic)",d.descAr||"",120):""}${cf(k,"r0","Commander title",(d.roles||[])[0]||"",40)}${cf(k,"r1","Deputy title",(d.roles||[])[1]||"",40)}${R[2]?cf(k,"r2","Management title",(d.roles||[])[2]||"",40):""}
 ${cu?`<label class="f">Color<input type="color" data-ck="${k}" data-cf="color" value="${colorOf(k)}"></label><label class="f">Change logo<input type="file" accept="image/png,image/jpeg,image/webp" data-lk="${k}"></label>`:""}</div>
 ${row(R[0],`data-k="${k}" data-f="cmd"`,[d.cmd,d.cmdUnit,d.cmdId])}
 ${row(R[1],`data-k="${k}" data-f="dep"`,[d.dep,d.depUnit,d.depId])}
 ${(d.mgmtList||[]).map((m,i)=>row(R[2],`data-mk="${k}" data-mi="${i}"`,[m.n,m.u,m.id])+(d.mgmtList.length>1?`<div style="text-align:end;margin-top:6px"><button class="btn danger sm" data-dm="${k}:${i}">Delete</button></div>`:"")).join("")}
 ${cust(k)}<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${R[2]?`<button class="btn ghost sm" data-am="${k}">Add Management</button>`:""}<button class="btn ghost sm" data-xa="${k}">${T("Add custom rank")}</button><button class="btn sm" data-s="${k}">Save ${esc(d.title)}</button><button class="btn danger sm" data-dd="${k}">Delete department</button></div></div>`}).join("");
-$("#nd-a").onclick=async()=>{const t=clean($("#nd-t").value,40),er=$("#nd-e");er.textContent="";
+$("#nd-a").onclick=async()=>{const ta=clean($("#nd-ta").value,40),t=clean($("#nd-t").value,40)||ta,er=$("#nd-e");er.textContent="";
 if(!t)return er.textContent="Department name is required.";
 if(Object.keys(DB.depts).length>=12)return er.textContent="Maximum reached";
 if(Object.values(DB.depts).some(x=>x.title.toLowerCase()===t.toLowerCase()))return er.textContent="This department already exists.";
 let logo="";const f=$("#nd-l").files[0];if(f){try{logo=await readLogo(f)}catch(x){return er.textContent="Invalid logo file."}}
 const mg=$("#nd-m").checked?1:0,k="d"+crypto.randomUUID().replace(/-/g,"").slice(0,10);
-DB.depts[k]={title:t,desc:clean($("#nd-d").value,120),color:$("#nd-c").value,roles:[0,1,2].map(i=>clean($("#nd-r"+i).value,40)),logo,mg,cmd:"",cmdUnit:"",dep:"",depUnit:"",mgmtList:mg?[{n:"",u:""}]:[]};
+DB.depts[k]={title:t,titleAr:ta,desc:clean($("#nd-d").value,120)||clean($("#nd-da").value,120),descAr:clean($("#nd-da").value,120),color:$("#nd-c").value,roles:[0,1,2].map(i=>clean($("#nd-r"+i).value,40)),logo,mg,cmd:"",cmdUnit:"",dep:"",depUnit:"",mgmtList:mg?[{n:"",u:""}]:[]};
 save();audit("Added department "+t);toast("Department added");tDepts()};
 app.querySelectorAll("[data-lk]").forEach(i=>i.onchange=async()=>{const k=i.dataset.lk;try{const l=await readLogo(i.files[0]);collect(k);DB.depts[k].logo=l;save();toast("Saved");tDepts()}catch(x){toast("Invalid logo file.",1)}});
 app.querySelectorAll("[data-dd]").forEach(b=>b.onclick=async()=>{const k=b.dataset.dd;if(DB.depts[k]&&await confirmD(`Delete department "${DB.depts[k].title}"?`)){delete DB.depts[k];if(dept===k)dept=null;save();audit("Deleted department "+k);toast("Department deleted");tDepts()}});
@@ -1199,8 +1231,8 @@ if(!v||!Array.isArray(v.ranks)||!Array.isArray(v.wings)||!v.depts||typeof v.dept
 const wings=[...new Set(v.wings.map(w=>clean(w)).filter(w=>w&&w!=="*"))].slice(0,30);
 const ranks=v.ranks.slice(0,30).map(r=>({name:clean(r.name),mdt:num(r.mdt),dispatch:num(r.dispatch),presence:num(r.presence),shift:num(r.shift),shiftDone:r.shiftDone?1:0,active:r.active?1:0,wings:(Array.isArray(r.wings)?r.wings:[]).map(w=>clean(w)).filter(w=>w==="*"||wings.includes(w))}));
 if(!ranks.length||ranks.some(r=>!r.name))throw 0;
-const depts={};for(const[k,d0]of Object.entries(v.depts).slice(0,12)){if(!/^[a-z0-9_]{1,24}$/.test(k))continue;const d=d0||{},b=SEED.depts[k],mg=b?b.mgmtList.length>0:!!d.mg,o={title:b?b.title:(clean(d.title,40)||"Department"),mg:mg?1:0};["cmd","cmdUnit","dep","depUnit"].forEach(f=>o[f]=clean(d[f]));
-o.roles=[0,1,2].map(i=>clean((d.roles||[])[i],40));if(!b){o.desc=clean(d.desc,120);o.color=/^#[0-9a-f]{6}$/i.test(d.color)?d.color:"#e8cf55";o.logo=typeof d.logo==="string"&&d.logo.length<=150000&&/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+\/=]+$/.test(d.logo)?d.logo:""}
+const depts={};for(const[k,d0]of Object.entries(v.depts).slice(0,12)){if(!/^[a-z0-9_]{1,24}$/.test(k))continue;const d=d0||{},b=SEED.depts[k],mg=b?b.mgmtList.length>0:!!d.mg,o={title:b?b.title:(clean(d.title,40)||clean(d.titleAr,40)||"Department"),mg:mg?1:0};["cmd","cmdUnit","dep","depUnit"].forEach(f=>o[f]=clean(d[f]));
+o.roles=[0,1,2].map(i=>clean((d.roles||[])[i],40));if(!b){o.titleAr=clean(d.titleAr,40);o.descAr=clean(d.descAr,120);o.desc=clean(d.desc,120);o.color=/^#[0-9a-f]{6}$/i.test(d.color)?d.color:"#e8cf55";o.logo=typeof d.logo==="string"&&d.logo.length<=150000&&/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+\/=]+$/.test(d.logo)?d.logo:""}
 o.cmdId=okId(d.cmdId);o.depId=okId(d.depId);o.custom=cleanCustom(d.custom);o.mgmtList=mg?(Array.isArray(d.mgmtList)&&d.mgmtList.length?d.mgmtList:[{}]).slice(0,12).map(m=>({n:clean(m.n),u:clean(m.u),id:okId(m.id)})):[];depts[k]=o}
 const news=(Array.isArray(v.news)?v.news:[]).slice(0,20).map(n=>({t:clean(n.t),b:cleanL(n.b,2000),d:clean(n.d,20),img:okImg(n.img,150000)})).filter(n=>n.t);
 return{wings,ranks,depts,news,roster:v.roster?cleanRoster(v.roster):structuredClone(SEED.roster),proto:v.proto?cleanProto(v.proto):structuredClone(SEED.proto),wanted:cleanWanted(v.wanted),secs:secsFull(v.secs),perm:cleanPerm(v.perm),items:cleanItems(v.items),rtitles:cleanRT(v.rtitles,v.titles,v.roster&&Array.isArray(v.roster.ranks)?v.roster.ranks:SEED.roster.ranks),cmds:cleanCards(v.cmds,"t",SEED.cmds),cars:cleanCards(v.cars,"r",SEED.cars)}}
@@ -1233,6 +1265,7 @@ for(const[k,v]of Object.entries({"All":"الكل","At large":"مطلوب (هار
 Object.assign(AR,{"Police outfits":"ملابس الشرطة","Wings outfits":"ملابس الوينقات","Wings outfit":"ملابس وينقات","Outfits":"ملابس الشرطة","Violations":"دفتر المخالفات","Terms":"البنود العسكرية","All ranks":"كل الرتب","Select a name":"اختر اسماً","Wanted":"المطلوبين","Add wanted person":"إضافة مطلوب","Job":"الوظيفة","Details":"التفاصيل","Photo (optional)":"صورة (اختياري)","Change photo":"تغيير الصورة","Remove photo":"حذف الصورة","Invalid photo file.":"ملف الصورة غير صالح.","No wanted persons at the moment.":"لا يوجد مطلوبين حالياً.","Name is required.":"الاسم مطلوب.","Total":"الإجمالي","Total personnel":"إجمالي الأفراد","Ranks":"الرتب","Add section":"إضافة قسم","Section title":"عنوان القسم","Add row":"إضافة صف","Save section":"حفظ القسم","Delete section":"حذف القسم","Logo":"لوقو","Position":"الموضع","At the end (highest rank)":"في النهاية (أعلى رتبة)","Required wings":"الوينقات المطلوبة","No wings yet. Add wings in the Wings tab.":"لا توجد وينقات. أضف وينقات من تبويب Wings.","Table":"الجدول","Unit / Badge":"الوحدة / الرقم","Add department":"إضافة قسم","Department name":"اسم القسم","Description":"الوصف","Commander title":"مسمى القائد","Deputy title":"مسمى النائب","Management title":"مسمى الإدارة","Color":"اللون","Logo (PNG, JPG or WebP)":"اللوقو (PNG أو JPG أو WebP)","Change logo":"تغيير اللوقو","Has a Management list":"يحتوي على قائمة إدارة","Department name is required.":"اسم القسم مطلوب.","This department already exists.":"هذا القسم موجود مسبقاً.","Invalid logo file.":"ملف اللوقو غير صالح.","Department added":"تمت إضافة القسم","Department deleted":"تم حذف القسم","Delete department":"حذف القسم"});
 Object.assign(AR,{"Los Santos Police Department":"شرطة لوس سانتوس","Official Portal":"البوابة الرسمية","Everything the department needs in one place: promotion requirements, personnel and ranks, departments and commanders, protocols and radio codes, violations and fines, wanted persons, outfits and vehicles.":"كل ما تحتاجه الإدارة في مكان واحد: متطلبات الترقية، الأفراد والرتب، الأقسام والقيادات، البروتوكولات وأكواد الراديو، المخالفات والغرامات، المطلوبون، الأزياء والسيارات."});
 Object.assign(AR,{"File is too large.":"الملف كبير جدًا."});
+Object.assign(AR,{"Department name (English)":"اسم القسم (إنجليزي)","Department name (Arabic)":"اسم القسم (عربي)","Description (English)":"الوصف (إنجليزي)","Description (Arabic)":"الوصف (عربي)","All":"الكل","Legal / Semi-legal":"قانوني / شبه قانوني"});
 Object.assign(AR,{"Rank Permissions":"صلاحيات الرتب","Police Rank Permissions":"صلاحيات رتب الشرطة","Prohibited Items":"الأغراض الممنوعة","Police Prohibited Items":"الأغراض الممنوعة","Permissions":"الصلاحيات","Permission":"الصلاحية","Permission Details":"تفاصيل الصلاحيات","Rules":"شرح وقواعد الصلاحيات","Class":"التصنيف","Item":"الأغراض","Item name":"اسم الغرض","Type":"النوع","Seizure cases":"حالات السحب","Legal":"قانوني","Semi-legal":"شبه قانوني","Illegal":"غير قانوني","Tier 1":"الدرجة الأولى","Tier 2":"الدرجة الثانية","Tier 3":"الدرجة الثالثة","Add permission":"إضافة صلاحية","Add rank":"إضافة رتبة","Add detail":"إضافة شرح","Text row (merged)":"صف نصي (مدموج)","Ranks":"الرتب","Delete this permission column?":"حذف عمود هذه الصلاحية؟","Delete this rank?":"حذف هذه الرتبة؟","Delete this detail?":"حذف هذا الشرح؟"});
 Object.assign(AR,{"Custom rank":"رتبة مخصصة","Rank title":"مسمى الرتبة","Add person":"إضافة شخص","Delete rank":"حذف الرتبة","Add custom rank":"إضافة رتبة مخصصة","Delete this custom rank?":"حذف هذه الرتبة المخصصة؟"});
 Object.assign(AR,{"Rank (from the table)":"الرتبة (من الجدول)"});
