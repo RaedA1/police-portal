@@ -91,6 +91,16 @@ function cleanItems(arr) {
     ty: ["legal", "semi", "illegal"].includes(x?.ty) ? x.ty : "semi", c: clL(x?.c, 300), img: okImg(x?.img, 60000),
   })).filter(x => x.n);
 }
+function cleanTxt(o) {
+  const r = {};
+  for (const [k, v] of Object.entries(o).slice(0, 500)) {
+    const kk = cl(k, 300);
+    if (!kk || ["__proto__", "constructor", "prototype"].includes(kk)) continue;
+    const e = cl(v?.e, 300), a = cl(v?.a, 300);
+    if (e || a) r[kk] = { e, a };
+  }
+  return r;
+}
 const SECK = ["articles", "fines", "outfits"];
 function cleanSecs(o) {
   const out = {};
@@ -146,7 +156,7 @@ function sanitize(v) {
     depts[k] = o;
   }
   const news = (Array.isArray(v.news) ? v.news : []).slice(0, 20).map(n => ({ t: cl(n?.t), b: clL(n?.b, 2000), d: cl(n?.d, 20), img: okImg(n?.img, 150000) })).filter(n => n.t);
-  return { wings, ranks, depts, news, roster: v.roster ? cleanRoster(v.roster) : undefined, proto: v.proto ? cleanProto(v.proto) : undefined, wanted: Array.isArray(v.wanted) ? cleanWanted(v.wanted) : undefined, secs: v.secs ? cleanSecs(v.secs) : undefined, perm: v.perm && typeof v.perm === "object" && Array.isArray(v.perm.cols) ? cleanPerm(v.perm) : undefined, items: Array.isArray(v.items) ? cleanItems(v.items) : undefined, rtitles: v.rtitles && typeof v.rtitles === "object" && !Array.isArray(v.rtitles) ? cleanRT(v.rtitles) : undefined, cmds: Array.isArray(v.cmds) ? cleanCards(v.cmds, "t") : undefined, cars: Array.isArray(v.cars) ? cleanCards(v.cars, "r") : undefined, updated: Date.now() };
+  return { wings, ranks, depts, news, roster: v.roster ? cleanRoster(v.roster) : undefined, proto: v.proto ? cleanProto(v.proto) : undefined, wanted: Array.isArray(v.wanted) ? cleanWanted(v.wanted) : undefined, secs: v.secs ? cleanSecs(v.secs) : undefined, txt: v.txt && typeof v.txt === "object" && !Array.isArray(v.txt) ? cleanTxt(v.txt) : undefined, perm: v.perm && typeof v.perm === "object" && Array.isArray(v.perm.cols) ? cleanPerm(v.perm) : undefined, items: Array.isArray(v.items) ? cleanItems(v.items) : undefined, rtitles: v.rtitles && typeof v.rtitles === "object" && !Array.isArray(v.rtitles) ? cleanRT(v.rtitles) : undefined, cmds: Array.isArray(v.cmds) ? cleanCards(v.cmds, "t") : undefined, cars: Array.isArray(v.cars) ? cleanCards(v.cars, "r") : undefined, updated: Date.now() };
 }
 
 export default async (req, ctx) => {
@@ -201,9 +211,10 @@ export default async (req, ctx) => {
       if (!next.cars && old?.cars) next.cars = old.cars;
       if (!next.rtitles && old?.rtitles) next.rtitles = old.rtitles;
       if (!next.perm && old?.perm) next.perm = old.perm;
+      if (!next.txt && old?.txt) next.txt = old.txt;
       if (!next.items && old?.items) next.items = old.items;
       if (old?.secs || next.secs) next.secs = { ...(old?.secs || {}), ...(next.secs || {}) };
-      const ch = ["wings", "ranks", "depts", "news", "roster", "proto", "wanted", "secs", "cmds", "cars", "rtitles", "perm", "items"].filter(k => JSON.stringify(old?.[k]) !== JSON.stringify(next[k]));
+      const ch = ["wings", "ranks", "depts", "news", "roster", "proto", "wanted", "secs", "cmds", "cars", "rtitles", "perm", "items", "txt"].filter(k => JSON.stringify(old?.[k]) !== JSON.stringify(next[k]));
       await st.setJSON("data", next);
       if (ch.length) await log(st, "Updated: " + ch.join(", "));
       return J({ ok: true });
