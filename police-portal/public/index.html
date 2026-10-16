@@ -804,6 +804,65 @@ main:has(.bento){padding-inline:max(30px,calc((100% - 1340px)/2))}
 .vcard .vb .badge{direction:ltr;unicode-bidi:isolate}
 .cgrid{justify-content:center}
 .cimg{aspect-ratio:1/1}
+/* ===== departments: bigger ===== */
+main:has(.dsel){padding-inline:max(24px,calc((100% - 1560px)/2))}
+main:has(.dsel)>h2:first-child{font-size:clamp(2.2rem,4vw,3.2rem);margin-bottom:34px}
+.dsel{gap:24px;margin-bottom:34px}
+.dsc{padding:38px 26px 32px;gap:12px;border-radius:28px}
+.dsi{width:132px;height:132px}
+.dsn{font-size:1.85rem}
+.dsd{font-size:1.08rem;min-height:3.2em}
+.dshow{border-radius:36px}
+.dbanner{gap:52px;padding:64px 72px}
+.dbi{width:230px;height:230px;box-shadow:0 0 0 14px color-mix(in srgb,var(--dcol) 12%,transparent),0 0 0 32px color-mix(in srgb,var(--dcol) 6%,transparent)}
+.dbanner h2{font-size:clamp(2.8rem,5.4vw,4.6rem);margin:8px 0 10px}
+.dbanner p{font-size:1.35rem;max-width:60ch;line-height:1.8}
+.dkick{font-size:1rem;padding:6px 18px}
+.dchart{padding:56px 64px 64px}
+.dlvl{width:min(100%,640px);padding-bottom:44px}
+.dlvl:not(:last-child)::after,.dlvl:last-of-type::after{height:44px}
+.dlbl{font-size:1.3rem;margin:10px 0 26px}
+.dgrid{grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:24px;margin-bottom:34px}
+.dshow .pc{padding:30px 34px;gap:22px;border-radius:24px}
+.dshow .pc .pav{width:76px;height:76px;font-size:1.7rem}
+.dshow .pc .mu{font-size:1.08rem}
+.dshow .pc h3{font-size:1.75rem;margin:6px 0}
+.dshow .pc .unit,.dshow .pc div:last-child{font-size:1.02rem}
+.dshow .pc.top{padding:38px 42px}.dshow .pc.top h3{font-size:2.1rem}
+@media(max-width:960px){
+.dsc{padding:22px 20px}.dsi{width:84px;height:84px}.dsn{font-size:1.4rem}
+.dbanner{padding:30px 24px;gap:20px}.dbi{width:130px;height:130px}.dbanner h2{font-size:2.3rem}.dbanner p{font-size:1.1rem}
+.dchart{padding:30px 16px 36px}.dgrid{grid-template-columns:1fr}
+.dshow .pc{padding:20px 22px}.dshow .pc .pav{width:58px;height:58px}.dshow .pc h3{font-size:1.4rem}.dshow .pc.top h3{font-size:1.6rem}}
+/* ===== application links ===== */
+header nav a.xl{display:flex;align-items:center;gap:13px}
+nav a.xl .xi{width:1.45em;height:1.45em;border-radius:50%;object-fit:contain;flex:none}
+nav a.xl .xe{margin-inline-start:auto;font-style:normal;opacity:.55;font-size:.95em}
+.lnks{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:22px;margin-bottom:34px}
+.lnk{display:flex;align-items:center;gap:22px;padding:24px 28px;border-radius:26px;text-decoration:none;color:var(--tx);border:1px solid color-mix(in srgb,var(--ac) 42%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 13%,var(--pan)),var(--pan));box-shadow:var(--sh);transition:transform .35s var(--ease),border-color .35s,box-shadow .35s}
+.lnk:hover{transform:translateY(-5px);border-color:var(--ac);box-shadow:0 26px 54px -26px var(--ac)}
+.lni{flex:none;width:96px;height:96px;display:grid;place-items:center}
+.lni img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 18px #0009)}
+.lnt{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.lnt b{font-size:1.55rem;line-height:1.3}.lnt small{color:var(--mu);font-size:1.02rem;line-height:1.7}
+.lnb{flex:none;padding:12px 22px;border-radius:13px;background:var(--ac);color:#0a0e14;font-weight:800;white-space:nowrap}
+:is([data-mode=soft],[data-mode=light]) .lnb{color:#fff}
+.qat.xt .qai{padding:6px;background:transparent}
+.qai.xq img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+.dcta{display:inline-block;margin-top:18px;padding:13px 26px;border-radius:13px;background:var(--dcol);color:#fff;font-weight:800;text-decoration:none;box-shadow:0 14px 30px -14px var(--dcol);transition:transform .25s var(--ease)}
+.dcta:hover{transform:translateY(-3px)}
+.lnprev{display:flex;align-items:center;gap:14px;margin-bottom:14px}.lnprev img{width:52px;height:52px;object-fit:contain}.lnprev b{font-size:1.15rem}
+@media(max-width:720px){.lnks{grid-template-columns:1fr}.lnk{flex-wrap:wrap;gap:14px;padding:20px}.lni{width:72px;height:72px}.lnb{width:100%;text-align:center}}
+/* home: raise content */
+@media(min-width:961px){main:has(.bento){padding-top:20px}}
+.bento .hero{min-height:0;padding:44px 56px;border-radius:30px}
+.bento .hero>h1{margin:6px 0 8px}
+.bento .hero .seal{width:230px}
+.bento .hero{grid-template-columns:minmax(0,1fr) 240px}
+.bento .stats{margin-top:16px}
+.bento .stat{padding:20px 24px}.bento .stat b{font-size:2.6rem}
+.qh{margin-top:34px}
+@media(max-width:720px){main:has(.bento){padding-top:14px}.bento .hero{padding:24px 18px}}
 </style>
 <meta name="theme-color" content="#050b1a">
 <meta name="description" content="Los Santos Police Department portal: promotion requirements, personnel table, radio protocols, violations book and wanted list.">
@@ -861,6 +920,7 @@ const LOGO="data:image/webp;base64,UklGRnhKAQBXRUJQVlA4WAoAAAAQAAAALwIALwIAQUxQS
 /* ---------- Data layer (seed data; edited via Admin Panel, persisted in localStorage) ---------- */
 const SEED={
 news:[],
+links:[{id:"l1",t:"Academy Website",tAr:"موقع الأكاديمية",d:"Apply to the police and request a transfer",dAr:"للتقديم على الشرطة والنقل",u:"https://academy.theklv.com/",lg:"academy",img:""},{id:"l2",t:"Wings Website",tAr:"موقع الوينقات",d:"Apply to the Wings if you are military",dAr:"للتقديم على الوينقات في حال كنت عسكري",u:"https://wings.theklv.com/",lg:"wings",img:""}],
 perm:{"cols": ["مسؤول وينق", "مسؤول الفترة", "إقامة نقطة تفتيش", "الإشراف على سكواد", "إقامة Roll Call", "صرف نقاط", "إنزال رتبة", "إنهاء الخدمة (فصل)", "ترقية", "إصدار مذكرة تفتيش"], "rows": [{"r": "Captain", "all": "له جميع الصلاحيات داخل الميدان والتي لا تتعلق بإدارة الشرطة ويجب عليه الإلتزام بلوائح الأنظمة والقوانين والتعاميم الموضحة.", "c": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"r": "Lieutenant I", "all": "", "c": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1]}, {"r": "Lieutenant", "all": "", "c": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0]}, {"r": "Staff Sergeant", "all": "", "c": [1, 1, 0, 1, 1, 0, 0, 0, 0, 0]}, {"r": "First Sergeant", "all": "", "c": [1, 1, 0, 1, 1, 0, 0, 0, 0, 0]}, {"r": "Sergeant", "all": "", "c": [1, 1, 0, 1, 0, 0, 0, 0, 0, 0]}, {"r": "Senior Officer", "all": "", "c": [1, 1, 0, 0, 0, 0, 0, 0, 0, 0]}, {"r": "IA", "all": "* تنويه: يحق لفرد الشؤون محاسبة أي شخص بحسب البنود الموجودة كما يحق له إنزال رتبة وفصل من يخالف البنود الموضحة.", "c": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}], "details": [{"t": "مسؤول وينق", "d": "يمكنه تقديم طلب إلى إدارة الشرطة موضحًا فيه مؤهلاته وخبراته التي تؤهله لاستلام قيادة قسم معين من أقسام الشهادات."}, {"t": "مسؤول الفترة", "d": "مسؤول الفترة هو المسؤول عن سير الميدان بالكامل، وتكون الأولوية من أعلى رتبة من رتب الأفراد، وهو من يشرف على أفراد الشرطة الباقين ويضمن عدم وجود أي أخطاء ميدانية من بقية أفراد الشرطة."}, {"t": "إقامة نقطة تفتيش", "d": "يحق له إقامة نقطة تفتيش بالتنسيق مع باقي الوحدات، كما يحق له إقامة نقاط التفتيش حتى خارج لوس سانتوس، مثل بوليتو وساندي شورز، بعد مراجعة Detective II وما فوق."}, {"t": "الإشراف على سكواد", "d": "«مشرف السكواد» مسؤول عن مجموعة من الأعضاء يتم تحديدها من قبل إدارة الشرطة، وهو المشرف المباشر على أدائهم. يجب عليه تقديم تقارير مفصلة عن عضو أو أكثر في فرقته عند توفر معلومات كافية، مع تقييم أدائهم وكفاءتهم سواء ممتازة أو سيئة. كما يُعد قائد السكواد قدوة ومرشدًا للأعضاء في فرقته."}, {"t": "إقامة Roll Call", "d": "يمكن عقد اجتماع مختصر إذا كان أعلى رتبة في الميدان، ويُعقد الاجتماع داخل اللعبة حيث يتم التنبيه على الأخطاء التي تحدث في الميدان وتقديم الحلول المناسبة. كما يحق له تفتيش الوحدات للتحقق من التزام بقية أفراد الشرطة بالمستلزمات المخصصة لهم."}, {"t": "صرف نقاط", "d": "يحق له صرف نقاط عند إمتياز أفراد معينين في حالة معينة أو عند وجود سبب مبرر، وهو مسؤول عن كل نقطة تُصرف بأسمه ولا يجب عليه صرف النقاط إلا لمن يستحقها."}, {"t": "إنزال رتبة (التقديري)", "d": "يحق له إنزال رتبة أي شرطي أدنى منه رتبة عند مخالفته لأحد البنود، حتى وإن نصت البنود على عدم إنزال الرتبة، وذلك بعد موافقة إدارة الشرطة (Chief Office)."}, {"t": "إنهاء الخدمة (فصل) (التقديري)", "d": "يحق له إنهاء خدمة أي شرطي أدنى منه رتبة في حال مخالفته لأحد البنود، حتى وإن نصت البنود على عدم الفصل، وذلك بعد موافقة إدارة الشرطة (Chief Office)."}, {"t": "ترقية", "d": "يحق له ترقية أي شرطي بشرط أن يكون أدنى منه برتبتين على الأقل، وذلك إذا رأى أنه مستحق لهذه الترقية وأن هناك مصلحة في ذلك. يتم تنفيذ الترقية بعد تقديم تقرير مفصل لإدارة الشرطة (Chief Office) يتضمن التفاصيل والأسباب المبررة."}, {"t": "إصدار مذكرة تفتيش", "d": "يُخوَّل كل من برتبة Lieutenant I فما فوق بإصدار مذكرات تفتيش للمنازل والمناطق الخاصة والتجارية، وكذلك بتفتيش الأجهزة الإلكترونية."}]},
 items:[{"id": "i1", "lv": 1, "n": "الدرع", "ty": "semi", "c": "في حال كان في حالة شوت فاير يتم اخذه", "img": ""}, {"id": "i2", "lv": 1, "n": "ربطة او كلبشه", "ty": "semi", "c": "في حال تم خطف مواطن او عسكري ,او حاول", "img": ""}, {"id": "i3", "lv": 1, "n": "سكيورتي كارد", "ty": "semi", "c": "يتم سحبه في حال كان في سرقه", "img": ""}, {"id": "i4", "lv": 1, "n": "مفاتيح المنازل", "ty": "semi", "c": "في حال تم الاشتباه به او تم القبض عليه بتهمة سرقة يتم سحبه", "img": ""}, {"id": "i5", "lv": 1, "n": "لوح الكتروني", "ty": "semi", "c": "في حال تم استخدامه لغرض السرقه ولا يكون له مبرر", "img": ""}, {"id": "i6", "lv": 1, "n": "لوكبيك عادي", "ty": "semi", "c": "في حال تم استخدامه لغرض السرقه او في اي حاله جنائية", "img": ""}, {"id": "i7", "lv": 1, "n": "دريل", "ty": "semi", "c": "في حال تم استخدامه لسرقه", "img": ""}, {"id": "i8", "lv": 1, "n": "خاتم الماس", "ty": "semi", "c": "في حال كانت الكميه كبيره و لا يوجد مبرر او في السرقه", "img": ""}, {"id": "i9", "lv": 1, "n": "ساعة يد", "ty": "semi", "c": "في حال كانت الكميه كبيره و لا يوجد مبرر او في السرقه", "img": ""}, {"id": "i10", "lv": 1, "n": "سلاسل ذهب", "ty": "semi", "c": "في حال كانت الكميه كبيره و لا يوجد مبرر او في السرقه", "img": ""}, {"id": "i11", "lv": 2, "n": "سبيكة ذهب", "ty": "semi", "c": "في حال كانت الكميه كبيره و لا يوجد مبرر او في السرقه", "img": ""}, {"id": "i12", "lv": 2, "n": "ربطات نقود", "ty": "semi", "c": "في حال كانت الكميه كبيره و لا يوجد مبرر او في السرقه", "img": ""}, {"id": "i13", "lv": 2, "n": "الاسلحه البيضاء بجميع انواعها", "ty": "semi", "c": "في حال تم استخدامه لغرض السرقه ولا يكون له مبرر", "img": ""}, {"id": "i14", "lv": 3, "n": "الاسلحة النارية", "ty": "illegal", "c": "في حال السلاح غير مرخص او في الحالات الجنائيه او اخراجه", "img": ""}, {"id": "i15", "lv": 3, "n": "اي نوع من انواع الرصاص", "ty": "illegal", "c": "سحبه في جميع الحالات", "img": ""}, {"id": "i16", "lv": 3, "n": "hack device", "ty": "illegal", "c": "في حال تم استخدامه في سرقه", "img": ""}, {"id": "i17", "lv": 3, "n": "c4", "ty": "illegal", "c": "يتم سحبه في جميع الحالات", "img": ""}],
 titles:[{id:"t1",t:"معالي",r:"Minister of Interior"},{id:"t2",t:"سعادة",r:"Colonel"},{id:"t3",t:"حضرة",r:"First Lieutenant"},{id:"t4",t:"",r:"Senior Officer"}],
@@ -1245,7 +1305,7 @@ c.getContext("2d").drawImage(im,0,0,c.width,c.height);let o=c.toDataURL("image/w
 /* ---------- Router ---------- */
 const app=$("#app");let sel=0,dept=null,tab="ranks";
 function markNav(){const r=(location.hash.slice(1)||"home").split("?")[0];document.querySelectorAll("nav a[data-r],.bnav a[data-r]").forEach(a=>a.dataset.r===r?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"))}
-function route(){applyNav();applyEdit();markNav();
+function route(){applyNav();applyEdit();markNav();renderLinksNav();
 const h=(location.hash||"#home").slice(1);
 applyTheme(h==="departments"&&dept?dept:null);
 document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r===h));
@@ -1255,6 +1315,8 @@ function stagger(){document.querySelectorAll(".grid,.req,.ranks").forEach(g=>{g.
 addEventListener("hashchange",()=>{dept=null;route()});
 
 const cleanL=(s,n)=>String(s||"").replace(/[\u0000-\u0009\u000b-\u001f<>]/g,"").trim().slice(0,n);
+const urlOk=u=>typeof u==="string"&&/^https?:\/\/[^\s<>"']{3,300}$/i.test(u.trim())?u.trim():"";
+function cleanLinks(a){return Array.isArray(a)?a.slice(0,12).map(x=>({id:/^[a-z0-9]{1,16}$/i.test(x&&x.id)?x.id:"l"+Math.random().toString(36).slice(2,10),t:clean(x&&x.t,40),tAr:clean(x&&x.tAr,40),d:clean(x&&x.d,160),dAr:clean(x&&x.dAr,160),u:urlOk(x&&x.u),lg:/^[a-z0-9_]{0,24}$/i.test(x&&x.lg)?((x&&x.lg)||""):"",img:okImg(x&&x.img,60000)})).filter(x=>(x.t||x.tAr)&&x.u):structuredClone(SEED.links)}
 function cleanTxt(o){const r={};if(!o||typeof o!=="object"||Array.isArray(o))return r;for(const[k,v]of Object.entries(o).slice(0,500)){const kk=clean(k,300);if(!kk||["__proto__","constructor","prototype"].includes(kk))continue;const e=clean(v&&v.e,300),a=clean(v&&v.a,300);if(e||a)r[kk]={e,a}}return r}
 function cleanPerm(p){if(!p||typeof p!=="object"||!Array.isArray(p.cols))return structuredClone(SEED.perm);
 const cols=p.cols.slice(0,16).map(x=>clean(x,40)||"—");
@@ -1386,6 +1448,26 @@ $("#txq").oninput=()=>{col();draw()};
 $("#txedit").onclick=()=>{col();save();EDIT=true;EPAUSE=false;try{sessionStorage.setItem("portal.edit","1")}catch(e){}location.hash="#home";route()};
 $("#txreset").onclick=async()=>{if(await confirmD("Reset all custom texts?")){DB.txt={};save();toast("Saved");setLang(lang)}};
 draw()}
+/* ---------- Application links (Academy / Wings ...) ---------- */
+const lname=l=>(lang==="ar"&&l.tAr)||l.t||l.tAr||"";
+const ldesc=l=>(lang==="ar"&&l.dAr)||l.d||l.dAr||"";
+const linkLogo=l=>l.img||logoOf(l.lg)||LOGO;
+const linkStrip=()=>(DB.links||[]).length?`<div class="lnks">${DB.links.map(l=>`<a class="lnk" href="${esc(l.u)}" target="_blank" rel="noopener noreferrer"><span class="lni"><img src="${linkLogo(l)}" alt=""></span><span class="lnt"><b translate="no">${esc(lname(l))}</b><small translate="no">${esc(ldesc(l))}</small></span><span class="lnb">${T("Open site")} &#8599;</span></a>`).join("")}</div>`:"";
+function renderLinksNav(){const nv=$("nav");if(nv)nv.querySelectorAll("a.xl").forEach(a=>a.remove())}
+function tLinks(){const A=DB.links,t=$("#tb"),ac='accept="image/png,image/jpeg,image/webp"';ASAVE=()=>{if(!A.every((_,i)=>{Object.assign(A[i],rd(t.querySelector(`[data-cd="${i}"]`)));return urlOk(A[i].u)}))return toast("Invalid link",1);save();toast("Saved");renderLinksNav()};
+const dk=Object.keys(DB.depts),opts=v=>`<option value="">&mdash;</option>`+dk.map(k=>`<option value="${esc(k)}"${k===v?" selected":""}>${esc(DB.depts[k].title)}</option>`).join("");
+const fields=x=>`<div class="form"><label class="f">${T("Title (English)")}<input data-f="t" maxlength="40" dir="ltr" value="${esc(x.t)}"></label><label class="f">${T("Title (Arabic)")}<input data-f="tAr" maxlength="40" dir="rtl" value="${esc(x.tAr)}"></label></div><div class="form" style="margin-top:10px"><label class="f">${T("Description (English)")}<input data-f="d" maxlength="160" dir="ltr" value="${esc(x.d)}"></label><label class="f">${T("Description (Arabic)")}<input data-f="dAr" maxlength="160" dir="rtl" value="${esc(x.dAr)}"></label></div><div class="form" style="margin-top:10px"><label class="f">${T("Link (URL)")}<input data-f="u" maxlength="300" dir="ltr" placeholder="https://" value="${esc(x.u)}"></label><label class="f">${T("Logo from department")}<select data-f="lg">${opts(x.lg)}</select></label><label class="f">${T("Custom logo (optional)")}<input type="file" data-f="img" ${ac}></label></div>`;
+const rd=c=>({t:clean(c.querySelector('[data-f="t"]').value,40),tAr:clean(c.querySelector('[data-f="tAr"]').value,40),d:clean(c.querySelector('[data-f="d"]').value,160),dAr:clean(c.querySelector('[data-f="dAr"]').value,160),u:urlOk(c.querySelector('[data-f="u"]').value),lg:c.querySelector('[data-f="lg"]').value});
+const img=async f=>{if(!f)return"";for(const m of[256,192,128]){try{return await readLogo(f,m,60000)}catch(e){}}throw 0};
+const render=()=>{t.innerHTML=`<div class="card hl" data-new style="margin-bottom:14px"><h3>${T("Add")}</h3><div style="margin-top:12px">${fields({t:"",tAr:"",d:"",dAr:"",u:"",lg:""})}</div><div class="err" id="ae"></div><div class="acts"><button class="btn sm" data-a="ad">${T("Add")}</button></div></div>`+A.map((x,i)=>`<div class="card" style="margin-bottom:14px" data-cd="${i}"><div class="lnprev"><img src="${linkLogo(x)}" alt=""><b>${esc(x.t||x.tAr)}</b></div>${fields(x)}<div class="acts"><button class="btn sm" data-a="sv" data-i="${i}">${T("Save")}</button><button class="btn ghost sm" data-a="mu" data-i="${i}">&uarr;</button><button class="btn ghost sm" data-a="md" data-i="${i}">&darr;</button>${x.img?`<button class="btn ghost sm" data-a="rp" data-i="${i}">Remove photo</button>`:""}<button class="btn danger sm" data-a="dl" data-i="${i}">${T("Delete")}</button></div></div>`).join("")};
+t.onchange=async e=>{const f=e.target,c=f.closest("[data-cd]");if(f.type!=="file"||!c)return;const i=+c.dataset.cd;try{Object.assign(A[i],rd(c));A[i].img=await img(f.files[0]);if(!urlOk(A[i].u))return toast("Invalid link",1);save();toast("Saved");renderLinksNav();render()}catch(x){toast("Invalid photo file.",1)}};
+t.onclick=async e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a,i=+b.dataset.i;
+if(a==="ad"){const c=t.querySelector("[data-new]"),o=rd(c);if(!o.t&&!o.tAr)return $("#ae").textContent=T("Name is required.");if(!o.u)return $("#ae").textContent=T("Link is required (http or https).");if(A.length>=12)return $("#ae").textContent=T("Maximum reached");let im="";try{im=await img(c.querySelector('[data-f="img"]').files[0])}catch(x){return $("#ae").textContent=T("Invalid photo file.")}A.push({id:"l"+Math.random().toString(36).slice(2,10),...o,img:im});save();toast("Saved");renderLinksNav();return render()}
+if(!A[i])return;Object.assign(A[i],rd(t.querySelector(`[data-cd="${i}"]`)));
+if(a==="sv"){if(!urlOk(A[i].u))return toast("Invalid link",1);save();toast("Saved");renderLinksNav();return render()}
+if(a==="mu"||a==="md"){const k=i+(a==="mu"?-1:1);if(k<0||k>=A.length)return;[A[i],A[k]]=[A[k],A[i]];save();renderLinksNav();return render()}
+if(a==="rp"){A[i].img="";save();renderLinksNav();return render()}
+if(a==="dl"&&await confirmD(`Delete "${A[i].t||A[i].tAr}"?`)){A.splice(i,1);save();toast("Deleted");renderLinksNav();render()}};render()}
 /* ---------- Commanders & Vehicles ---------- */
 function rosterSelect(attrs,id,n,u,req){const P=DB.roster.people;let sel=id&&P.some(x=>x.id===id)?id:"",extra="";
 if(!sel&&(n||u)){const nm=P.filter(x=>n&&x.n.trim().toLowerCase()===n.trim().toLowerCase()),um=P.filter(x=>u&&x.u===u),m=nm[0]||(um.length===1?um[0]:null);if(m)sel=m.id;else{sel="~";extra=`<option value="~" selected>${esc((u?u+" ":"")+n)} (manual)</option>`}}
@@ -1461,8 +1543,8 @@ const P=(role,n,u,c)=>`<div class="pc ${c}"><div class="pav">${c==="top"?"★":c
 const keys=Object.keys(DB.depts),cur=dept&&DB.depts[dept]?dept:keys[0],cd=DB.depts[cur];
 const ic=k=>logoOf(k)?`<img class="emb" src="${logoOf(k)}" alt="">`:(em[k]||em.affairs);
 const grp=(t,L,cls)=>`<div class="dlbl"><span>${t}</span></div><div class="dgrid">${L.map(m=>W(m.id,m.n,m.u,t,cls)).join("")}</div>`;
-app.innerHTML=`<h2>Departments</h2><div class="dsel" role="tablist">${keys.map(k=>`<button type="button" role="tab" class="dsc${cur===k?" on":""}" data-d="${k}" style="--dcol:${colorOf(k)}" aria-selected="${cur===k}"><i class="dsi">${ic(k)}</i><span class="dsn">${esc(dn(DB.depts[k]))}</span><span class="dsd">${esc(descOf(k))}</span></button>`).join("")}</div>
-${cd?`<section class="dshow" style="--dcol:${colorOf(cur)}"><div class="dbanner"><i class="dbi">${ic(cur)}</i><div><span class="dkick">${lead(cd,cur)}</span><h2>${esc(dn(cd))}</h2><p>${esc(descOf(cur))}</p></div></div>
+app.innerHTML=`<h2>Departments</h2>${linkStrip()}<div class="dsel" role="tablist">${keys.map(k=>`<button type="button" role="tab" class="dsc${cur===k?" on":""}" data-d="${k}" style="--dcol:${colorOf(k)}" aria-selected="${cur===k}"><i class="dsi">${ic(k)}</i><span class="dsn">${esc(dn(DB.depts[k]))}</span><span class="dsd">${esc(descOf(k))}</span></button>`).join("")}</div>
+${cd?`<section class="dshow" style="--dcol:${colorOf(cur)}"><div class="dbanner"><i class="dbi">${ic(cur)}</i><div><span class="dkick">${lead(cd,cur)}</span><h2>${esc(dn(cd))}</h2><p>${esc(descOf(cur))}</p>${(DB.links||[]).filter(l=>l.lg===cur).map(l=>`<a class="dcta" href="${esc(l.u)}" target="_blank" rel="noopener noreferrer" translate="no">${esc(ldesc(l))} &#8599;</a>`).join("")}</div></div>
 <div class="dchart"><div class="dlvl">${W(cd.cmdId,cd.cmd,cd.cmdUnit,rolesOf(cur)[0],"top")}</div><div class="dlvl">${W(cd.depId,cd.dep,cd.depUnit,rolesOf(cur)[1],"mid")}</div>
 ${(cd.mgmtList||[]).length?grp(esc(rolesOf(cur)[2]||""),cd.mgmtList,"low"):""}${(cd.custom||[]).map(g=>grp(esc(g.t),g.list.length?g.list:[{id:"",n:"",u:""}],"low")).join("")}</div></section>`:""}`;
 app.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{dept=b.dataset.d;applyTheme(dept);pDept()})}
@@ -1581,7 +1663,7 @@ $("#pw").onkeydown=e=>{if(e.key==="Enter")$("#go").click()};
 {const b=$("#eye"),p=$("#pw"),sv=s=>{p.type=s?"text":"password";b.setAttribute("aria-label",T(s?"Hide password":"Show password"));b.innerHTML=EYE[s]};sv(0);b.onclick=()=>sv(p.type==="password"?1:0)}
 $("#go").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password:$("#pw").value})});const j=await r.json().catch(()=>({}));if(r.ok&&j.ok){authed=true;csrf=j.csrf;adminUI()}else if(r.status===429)lockCount(+j.retryAfter||180);else if(r.status===500)$("#pe").textContent="Server is not configured.";else $("#pe").textContent="Incorrect password."}catch(e){$("#pe").textContent="Connection error."}}}
 let ASAVE=null,TXOK=false;
-const ANAV=[["Main",[["news","Announcements","✦"],["roster","Link","▦"],["depts","Departments","⚑"],["proto","Protocols","☎"],["cars","Vehicles","◈"],["outfits","Outfits","▣"],["ranks","Ranks","⬆"],["wings","Wings","✈"]]],["More",[["wanted","Wanted","◉"],["articles","Terms","§"],["fines","Violations","⚖"],["cmds","Commanders","★"],["titles","Rank Titles","✎"],["perms","Rank Permissions","✔"],["items","Prohibited Items","⊘"]]],["System",[["texts","Site Texts","✎"],["backup","Backup","⤓"],["log","Audit log","☰"]]]];
+const ANAV=[["Main",[["news","Announcements","✦"],["roster","Link","▦"],["depts","Departments","⚑"],["links","Application Links","↗"],["proto","Protocols","☎"],["cars","Vehicles","◈"],["outfits","Outfits","▣"],["ranks","Ranks","⬆"],["wings","Wings","✈"]]],["More",[["wanted","Wanted","◉"],["articles","Terms","§"],["fines","Violations","⚖"],["cmds","Commanders","★"],["titles","Rank Titles","✎"],["perms","Rank Permissions","✔"],["items","Prohibited Items","⊘"]]],["System",[["texts","Site Texts","✎"],["backup","Backup","⤓"],["log","Audit log","☰"]]]];
 function adminUI(){if(tab==="texts"&&!TXOK)tab="news";const cur=ANAV.flatMap(g=>g[1]).find(t=>t[0]===tab)||ANAV[0][1][0];if(!ANAV.flatMap(g=>g[1]).some(t=>t[0]===tab))tab=cur[0];
 app.innerHTML=`<div class="adm-top"><h2>Admin Panel</h2><button class="btn ghost sm" id="lo">Sign out</button></div>
 <div class="adm"><aside class="adm-nav" aria-label="Admin">${ANAV.map(g=>`<div class="adm-g">${g[0]}</div>`+g[1].map(t=>`<button type="button" data-tab="${t[0]}"${tab===t[0]?' aria-current="page"':""}><i class="lic" aria-hidden="true"></i><span>${t[1]}</span></button>`).join("")).join("")}</aside><section class="adm-main"><h3 class="adm-h">${cur[1]}</h3><div id="tb"></div></section></div><button type="button" class="fab" id="fab">${T("Save")}</button>`;
@@ -1589,7 +1671,7 @@ ASAVE=()=>{save();toast("Saved")};$("#fab").onclick=()=>ASAVE&&ASAVE();
 $("#lo").onclick=async()=>{try{await fetch("/api/logout",{method:"POST"})}catch(e){}authed=false;csrf="";location.hash="#home"};
 app.querySelectorAll("[data-tab]").forEach(b=>b.onclick=async()=>{const t=b.dataset.tab;if(t==="texts"&&!TXOK){if(!await confirmD("Warning: this section changes texts across the whole site for every visitor immediately. Only change things you are sure about. Continue?"))return;TXOK=true}tab=t;adminUI()});
 const ac=app.querySelector("[aria-current]");ac&&ac.scrollIntoView({block:"nearest",inline:"center"});
-({ranks:tRanks,wings:tWings,depts:tDepts,roster:tRoster,proto:tProto,wanted:tWanted,fines:()=>tSec("fines",FH),outfits:()=>tSec("outfits",OH),cmds:()=>tCards("cmds","Name","Title","t",30),cars:()=>tCards("cars","Vehicle","Required rank","r",12),articles:()=>tSec("articles",[{k:"a",l:"Article",m:12},{k:"b",l:"Text",m:200}]),titles:tTitles,texts:tTexts,perms:tPerms,items:tItems,news:tNews,backup:tBackup,log:tLog}[tab]||tRanks)()}
+({ranks:tRanks,wings:tWings,depts:tDepts,roster:tRoster,proto:tProto,wanted:tWanted,fines:()=>tSec("fines",FH),outfits:()=>tSec("outfits",OH),cmds:()=>tCards("cmds","Name","Title","t",30),cars:()=>tCards("cars","Vehicle","Required rank","r",12),articles:()=>tSec("articles",[{k:"a",l:"Article",m:12},{k:"b",l:"Text",m:200}]),titles:tTitles,links:tLinks,texts:tTexts,perms:tPerms,items:tItems,news:tNews,backup:tBackup,log:tLog}[tab]||tRanks)()}
 function tRanks(){
 $("#tb").innerHTML=`<button class="btn sm" id="add">Add rank</button><div class="sw card" style="margin-top:12px"><table class="tbl"><thead><tr><th>Order</th><th>Rank</th><th>MDT</th><th>Dispatch</th><th>Presence</th><th>Shift</th><th>Wings</th><th>On</th><th></th></tr></thead><tbody>
 ${DB.ranks.map((x,i)=>`<tr><td data-l="Order">${i+1}</td><td data-l="Rank">${esc(x.name)}</td><td data-l="MDT">${x.mdt}</td><td data-l="Dispatch">${x.dispatch}</td><td data-l="Presence">${x.presence}</td><td data-l="Shift">${x.shift}${x.shiftDone?" ✔":""}</td><td data-l="Wings">${x.wings.includes("*")?"ALL":x.wings.length}</td><td data-l="Active">${x.active?"Yes":"No"}</td>
@@ -1696,7 +1778,7 @@ const depts={};for(const[k,d0]of Object.entries(v.depts).slice(0,12)){if(!/^[a-z
 o.roles=[0,1,2].map(i=>clean((d.roles||[])[i],40));if(!b){o.titleAr=clean(d.titleAr,40);o.descAr=clean(d.descAr,120);o.desc=clean(d.desc,120);o.color=/^#[0-9a-f]{6}$/i.test(d.color)?d.color:"#e8cf55";o.logo=typeof d.logo==="string"&&d.logo.length<=150000&&/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+\/=]+$/.test(d.logo)?d.logo:""}
 o.cmdId=okId(d.cmdId);o.depId=okId(d.depId);o.custom=cleanCustom(d.custom);o.mgmtList=mg?(Array.isArray(d.mgmtList)&&d.mgmtList.length?d.mgmtList:[{}]).slice(0,12).map(m=>({n:clean(m.n),u:clean(m.u),id:okId(m.id)})):[];depts[k]=o}
 const news=(Array.isArray(v.news)?v.news:[]).slice(0,20).map(n=>({t:clean(n.t),b:cleanL(n.b,2000),d:clean(n.d,20),img:okImg(n.img,150000)})).filter(n=>n.t);
-return{wings,ranks,depts,news,roster:v.roster?cleanRoster(v.roster):structuredClone(SEED.roster),proto:v.proto?cleanProto(v.proto):structuredClone(SEED.proto),wanted:cleanWanted(v.wanted),secs:secsFull(v.secs),txt:cleanTxt(v.txt),perm:cleanPerm(v.perm),items:cleanItems(v.items),rtitles:cleanRT(v.rtitles,v.titles,v.roster&&Array.isArray(v.roster.ranks)?v.roster.ranks:SEED.roster.ranks),cmds:cleanCards(v.cmds,"t",SEED.cmds),cars:cleanCards(v.cars,"r",SEED.cars)}}
+return{wings,ranks,depts,news,roster:v.roster?cleanRoster(v.roster):structuredClone(SEED.roster),proto:v.proto?cleanProto(v.proto):structuredClone(SEED.proto),wanted:cleanWanted(v.wanted),secs:secsFull(v.secs),links:cleanLinks(v.links),txt:cleanTxt(v.txt),perm:cleanPerm(v.perm),items:cleanItems(v.items),rtitles:cleanRT(v.rtitles,v.titles,v.roster&&Array.isArray(v.roster.ranks)?v.roster.ranks:SEED.roster.ranks),cmds:cleanCards(v.cmds,"t",SEED.cmds),cars:cleanCards(v.cars,"r",SEED.cars)}}
 function tBackup(){
 $("#tb").innerHTML=`<div class="card"><p class="mu">Save a backup file to keep your data safe or move it to another browser.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn sm" id="ex">Export backup</button><label class="btn ghost sm" style="cursor:pointer">Import backup<input id="im" type="file" accept=".json,application/json" hidden></label></div></div>`;
 $("#ex").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(DB)],{type:"application/json"}));a.download="portal-backup.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);audit("Exported backup")};
@@ -1726,6 +1808,7 @@ for(const[k,v]of Object.entries({"All":"الكل","At large":"مطلوب (هار
 Object.assign(AR,{"Police outfits":"ملابس الشرطة","Wings outfits":"ملابس الوينقات","Wings outfit":"ملابس وينقات","Outfits":"ملابس الشرطة","Violations":"دفتر المخالفات","Terms":"البنود العسكرية","All ranks":"كل الرتب","Select a name":"اختر اسماً","Wanted":"المطلوبين","Add wanted person":"إضافة مطلوب","Job":"الوظيفة","Details":"التفاصيل","Photo (optional)":"صورة (اختياري)","Change photo":"تغيير الصورة","Remove photo":"حذف الصورة","Invalid photo file.":"ملف الصورة غير صالح.","No wanted persons at the moment.":"لا يوجد مطلوبين حالياً.","Name is required.":"الاسم مطلوب.","Total":"الإجمالي","Total personnel":"إجمالي الأفراد","Ranks":"الرتب","Add section":"إضافة قسم","Section title":"عنوان القسم","Add row":"إضافة صف","Save section":"حفظ القسم","Delete section":"حذف القسم","Logo":"لوقو","Position":"الموضع","At the end (highest rank)":"في النهاية (أعلى رتبة)","Required wings":"الوينقات المطلوبة","No wings yet. Add wings in the Wings tab.":"لا توجد وينقات. أضف وينقات من تبويب Wings.","Table":"الجدول","Unit / Badge":"الوحدة / الرقم","Add department":"إضافة قسم","Department name":"اسم القسم","Description":"الوصف","Commander title":"مسمى القائد","Deputy title":"مسمى النائب","Management title":"مسمى الإدارة","Color":"اللون","Logo (PNG, JPG or WebP)":"اللوقو (PNG أو JPG أو WebP)","Change logo":"تغيير اللوقو","Has a Management list":"يحتوي على قائمة إدارة","Department name is required.":"اسم القسم مطلوب.","This department already exists.":"هذا القسم موجود مسبقاً.","Invalid logo file.":"ملف اللوقو غير صالح.","Department added":"تمت إضافة القسم","Department deleted":"تم حذف القسم","Delete department":"حذف القسم"});
 Object.assign(AR,{"Los Santos Police Department":"شرطة لوس سانتوس","Official Portal":"البوابة الرسمية","Everything the department needs in one place: promotion requirements, personnel and ranks, departments and commanders, protocols and radio codes, violations and fines, wanted persons, clothing and vehicles, rank titles, rank permissions, and prohibited items.":"كل ما تحتاجه الإدارة في مكان واحد: متطلبات الترقية، الأفراد والرتب، الأقسام والقيادات، البروتوكولات وأكواد الراديو، المخالفات والغرامات، المطلوبون، الملابس والسيارات، مسميات الرتب، صلاحيات الرتب، والأغراض الممنوعة."});
 Object.assign(AR,{"File is too large.":"الملف كبير جدًا."});
+Object.assign(AR,{"Application Links":"روابط التقديم","Open site":"فتح الموقع","Title (English)":"العنوان (إنجليزي)","Title (Arabic)":"العنوان (عربي)","Link (URL)":"الرابط","Logo from department":"شعار من قسم","Custom logo (optional)":"شعار مخصص (اختياري)","Invalid link":"الرابط غير صحيح","Link is required (http or https).":"الرابط مطلوب ويبدأ بـ http أو https."});
 Object.assign(AR,{"Quick access":"وصول سريع","Search":"بحث"});
 Object.assign(AR,{"Site Texts":"نصوص الموقع","Be careful":"انتبه","Every change here appears on the live site for all visitors. Only change things you are sure about.":"أي تغيير هنا يظهر مباشرة في الموقع لجميع الزوار. لا تغيّر شيئًا إلا وأنت متأكد منه.","Start visual edit mode":"بدء وضع التعديل المباشر","Reset all texts":"إعادة كل النصوص للأصل","Search texts":"بحث في النصوص","Custom texts":"نص معدّل","Reset all custom texts?":"إعادة كل النصوص المعدّلة للأصل؟","Warning: this section changes texts across the whole site for every visitor immediately. Only change things you are sure about. Continue?":"تحذير: هذا القسم يغيّر النصوص في كل الموقع لجميع الزوار فورًا. لا تغيّر شيئًا إلا وأنت متأكد منه. هل تريد المتابعة؟"});
 Object.assign(AR,{"Department name (English)":"اسم القسم (إنجليزي)","Department name (Arabic)":"اسم القسم (عربي)","Description (English)":"الوصف (إنجليزي)","Description (Arabic)":"الوصف (عربي)","All":"الكل","Legal / Semi-legal":"قانوني / شبه قانوني"});
@@ -1753,7 +1836,7 @@ function setLang(l){lang=l;try{localStorage.setItem("portal.lang",l)}catch(e){}
 document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr";
 document.title=(()=>{const k="Police Website",o=TXM()[k]||{};return l==="ar"?o.a||"موقع الشرطة":o.e||k})();
 document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.lang===l));
-document.querySelectorAll(".logo span,nav a,#dno,#dyes,#adm,.more summary,.bnav span,.stx").forEach(e=>{e.dataset.en=e.dataset.en||e.textContent;e.textContent=e.dataset.en});
+document.querySelectorAll(".logo span,nav a:not(.xl),#dno,#dyes,#adm,.more summary,.bnav span,.stx").forEach(e=>{e.dataset.en=e.dataset.en||e.textContent;e.textContent=e.dataset.en});
 walk(document.body);route()}
 /* ---------- UX polish: mobile menu, scroll, quick search ---------- */
 let LOADFAIL=false;
@@ -1770,14 +1853,15 @@ addEventListener("scroll",()=>{if(!tk)tk=requestAnimationFrame(sc)},{passive:tru
 {const qd=$("#qd"),qi=$("#qi"),ql=$("#ql");let R=[],sel=0;const ar=()=>lang==="ar";
 const norm=x=>String(x).toLowerCase().replace(/[\u064b-\u065f\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه");
 const src=()=>{const L=[];document.querySelectorAll("header nav a[data-r]").forEach(a=>L.push({t:a.textContent.trim(),s:"",h:a.getAttribute("href"),k:"p"}));
-Object.entries(DB.depts).forEach(([k,v])=>L.push({t:dn(v),s:"",d:k,k:"d"}));
+Object.entries(DB.depts).forEach(([k,v])=>L.push({t:dn(v),s:"",d:k,k:"d"}));(DB.links||[]).forEach(l=>{try{L.push({t:lname(l),s:new URL(l.u).host,u:l.u,k:"x"})}catch(e){}});
 DB.roster.people.forEach(p=>L.push({t:p.n,s:p.u+" \u00b7 "+p.r,n:p.n,k:"u"}));return L};
-const tag={p:["Page","صفحة"],d:["Department","قسم"],u:["Person","شخص"]};
-const draw=()=>{const q=norm(qi.value.trim());let L=src();if(q){L=L.filter(x=>norm(x.t+" "+x.s).includes(q)).sort((a,b)=>(norm(b.t).startsWith(q)?1:0)-(norm(a.t).startsWith(q)?1:0))}else L=L.filter(x=>x.k==="p");R=L.slice(0,9);sel=0;
+const tag={p:["Page","صفحة"],d:["Department","قسم"],u:["Person","شخص"],x:["Link","رابط"]};
+const draw=()=>{const q=norm(qi.value.trim());let L=src();if(q){L=L.filter(x=>norm(x.t+" "+x.s).includes(q)).sort((a,b)=>(norm(b.t).startsWith(q)?1:0)-(norm(a.t).startsWith(q)?1:0))}else L=L.filter(x=>x.k==="p"||x.k==="x");R=L.slice(0,9);sel=0;
 ql.innerHTML=R.map((x,i)=>`<button type="button" role="option" class="qr${i?"":" on"}" data-i="${i}"><span class="qk">${tag[x.k][ar()?1:0]}</span><span class="qt">${esc(x.t)}</span>${x.s?`<span class="qs">${esc(x.s)}</span>`:""}</button>`).join("")||`<p class="mu" style="padding:18px;text-align:center">${ar()?"لا توجد نتائج":"No results"}</p>`};
 const mark=()=>ql.querySelectorAll(".qr").forEach((b,i)=>{b.classList.toggle("on",i===sel);if(i===sel)b.scrollIntoView({block:"nearest"})});
 const go=i=>{const x=R[i];if(!x)return;qd.close();
 if(x.k==="p")location.hash=x.h;
+else if(x.k==="x"){window.open(x.u,"_blank","noopener,noreferrer")}
 else if(x.k==="d"){location.hash="#departments";setTimeout(()=>{const b=document.querySelector(`[data-d="${x.d}"]`);b&&b.click()},160)}
 else{location.hash="#roster";setTimeout(()=>{const i=document.querySelector("#app input[type=search]");if(i){i.value=x.n;i.dispatchEvent(new Event("input"))}},160)}};
 const open=()=>{qi.placeholder=ar()?"ابحث عن صفحة أو شخص أو قسم":"Search pages, people and departments";qi.value="";draw();qd.showModal();qi.focus()};
@@ -1795,7 +1879,7 @@ for(const[k,v]of Object.entries(P)){const u=`url("data:image/svg+xml,${encodeURI
 const st=document.createElement("style");st.textContent=c;document.head.appendChild(st)}
 document.documentElement.style.setProperty("--logo",`url("${LOGO}")`);
 $("#lgo").src=LOGO;{const ic=document.createElement("link");ic.rel="icon";ic.href=LOGO;document.head.append(ic)}
-(async()=>{try{const r=await fetch("/api/data",{cache:"no-store"});if(!r.ok)LOADFAIL=true;if(r.ok){const j=await r.json();if(j&&j.data)DB=j.data;if(!DB.roster)DB.roster=structuredClone(SEED.roster);if(!DB.proto)DB.proto=structuredClone(SEED.proto);if(!DB.wanted)DB.wanted=[];if(!DB.txt||typeof DB.txt!=="object"||Array.isArray(DB.txt))DB.txt={};if(!DB.rtitles||typeof DB.rtitles!=="object"||Array.isArray(DB.rtitles))DB.rtitles=deriveRT(Array.isArray(DB.titles)?DB.titles:SEED.titles,DB.roster.ranks);if(!DB.perm||typeof DB.perm!=="object"||!Array.isArray(DB.perm.cols))DB.perm=structuredClone(SEED.perm);if(!Array.isArray(DB.items))DB.items=structuredClone(SEED.items);if(!Array.isArray(DB.cmds))DB.cmds=structuredClone(SEED.cmds);if(!Array.isArray(DB.cars))DB.cars=structuredClone(SEED.cars);DB.cmds.forEach(c=>{if(!c.pid){const p=DB.roster.people.find(x=>x.n.trim().toLowerCase()===String(c.n).trim().toLowerCase());if(p){c.pid=p.id;if(c.t===p.r)c.t=""}}});DB.cars.forEach(c=>{const d=SEED.cars.find(x=>x.id===c.id);if(d&&!c.img)c.img=d.img});DB.secs=secsFull(DB.secs)}}catch(e){LOADFAIL=true}try{const r=await fetch("/api/session",{cache:"no-store"});if(r.ok){const j=await r.json();if(j.admin){authed=true;csrf=j.csrf}}}catch(e){}setLang(lang);if(LOADFAIL&&!/^(localhost|127\.)/.test(location.hostname))$("#lf").hidden=false})();
+(async()=>{try{const r=await fetch("/api/data",{cache:"no-store"});if(!r.ok)LOADFAIL=true;if(r.ok){const j=await r.json();if(j&&j.data)DB=j.data;if(!DB.roster)DB.roster=structuredClone(SEED.roster);if(!DB.proto)DB.proto=structuredClone(SEED.proto);if(!DB.wanted)DB.wanted=[];if(!DB.txt||typeof DB.txt!=="object"||Array.isArray(DB.txt))DB.txt={};if(!DB.rtitles||typeof DB.rtitles!=="object"||Array.isArray(DB.rtitles))DB.rtitles=deriveRT(Array.isArray(DB.titles)?DB.titles:SEED.titles,DB.roster.ranks);if(!DB.perm||typeof DB.perm!=="object"||!Array.isArray(DB.perm.cols))DB.perm=structuredClone(SEED.perm);if(!Array.isArray(DB.items))DB.items=structuredClone(SEED.items);if(!Array.isArray(DB.links))DB.links=structuredClone(SEED.links);if(!Array.isArray(DB.cmds))DB.cmds=structuredClone(SEED.cmds);if(!Array.isArray(DB.cars))DB.cars=structuredClone(SEED.cars);DB.cmds.forEach(c=>{if(!c.pid){const p=DB.roster.people.find(x=>x.n.trim().toLowerCase()===String(c.n).trim().toLowerCase());if(p){c.pid=p.id;if(c.t===p.r)c.t=""}}});DB.cars.forEach(c=>{const d=SEED.cars.find(x=>x.id===c.id);if(d&&!c.img)c.img=d.img});DB.secs=secsFull(DB.secs)}}catch(e){LOADFAIL=true}try{const r=await fetch("/api/session",{cache:"no-store"});if(r.ok){const j=await r.json();if(j.admin){authed=true;csrf=j.csrf}}}catch(e){}setLang(lang);if(LOADFAIL&&!/^(localhost|127\.)/.test(location.hostname))$("#lf").hidden=false})();
 </script>
 </body>
 </html>
