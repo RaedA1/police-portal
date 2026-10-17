@@ -863,6 +863,56 @@ nav a.xl .xe{margin-inline-start:auto;font-style:normal;opacity:.55;font-size:.9
 .bento .stat{padding:20px 24px}.bento .stat b{font-size:2.6rem}
 .qh{margin-top:34px}
 @media(max-width:720px){main:has(.bento){padding-top:14px}.bento .hero{padding:24px 18px}}
+/* ===== departments: medium size ===== */
+main:has(.dsel){padding-inline:max(24px,calc((100% - 1400px)/2))}
+main:has(.dsel)>h2:first-child{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:26px}
+.dsel{gap:18px;margin-bottom:26px}
+.dsc{padding:28px 22px 24px;gap:9px;border-radius:24px}
+.dsi{width:100px;height:100px}
+.dsn{font-size:1.5rem}
+.dsd{font-size:.95rem;min-height:3em}
+.dshow{border-radius:30px}
+.dbanner{gap:40px;padding:44px 52px}
+.dbi{width:176px;height:176px;box-shadow:0 0 0 10px color-mix(in srgb,var(--dcol) 12%,transparent),0 0 0 24px color-mix(in srgb,var(--dcol) 6%,transparent)}
+.dbanner h2{font-size:clamp(2.2rem,4.2vw,3.5rem);margin:6px 0 8px}
+.dbanner p{font-size:1.15rem;max-width:58ch}
+.dkick{font-size:.9rem;padding:5px 15px}
+.dchart{padding:42px 50px 48px}
+.dlvl{width:min(100%,540px);padding-bottom:36px}
+.dlvl:not(:last-child)::after,.dlvl:last-of-type::after{height:36px}
+.dlbl{font-size:1.12rem;margin:8px 0 20px}
+.dgrid{grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:18px;margin-bottom:26px}
+.dshow .pc{padding:22px 26px;gap:18px;border-radius:20px}
+.dshow .pc .pav{width:62px;height:62px;font-size:1.4rem}
+.dshow .pc .mu{font-size:.95rem}
+.dshow .pc h3{font-size:1.45rem;margin:4px 0}
+.dshow .pc.top{padding:28px 32px}.dshow .pc.top h3{font-size:1.75rem}
+.lnks{gap:18px;margin-bottom:26px}
+.lnk{padding:18px 24px;border-radius:22px;gap:18px}
+.lni{width:78px;height:78px}
+.lnt b{font-size:1.35rem}.lnt small{font-size:.95rem}
+.lnb{padding:10px 18px}
+@media(max-width:960px){
+.dsc{padding:18px 18px}.dsi{width:70px;height:70px}.dsn{font-size:1.25rem}
+.dbanner{padding:24px 20px;gap:16px}.dbi{width:110px;height:110px}.dbanner h2{font-size:2rem}.dbanner p{font-size:1rem}
+.dchart{padding:24px 14px 30px}.dgrid{grid-template-columns:1fr}
+.dshow .pc{padding:16px 18px}.dshow .pc .pav{width:52px;height:52px}.dshow .pc h3{font-size:1.25rem}.dshow .pc.top h3{font-size:1.4rem}}
+/* ===== departments: wide rectangular cards ===== */
+.dsel{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:24px}
+.dsc{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i n" "i d";column-gap:18px;row-gap:2px;align-items:center;justify-items:start;text-align:start;padding:16px 24px;min-height:0;border-radius:18px;gap:0 18px}
+.dsc .dsi{grid-area:i;width:76px;height:76px}
+.dsc .dsn{grid-area:n;align-self:end;font-size:1.35rem}
+.dsc .dsd{grid-area:d;align-self:start;min-height:0;font-size:.9rem;line-height:1.5}
+.dsc::before{background:radial-gradient(240px 120px at 0 50%,color-mix(in srgb,var(--dcol) 24%,transparent),transparent 75%)}
+[dir=rtl] .dsc::before{background:radial-gradient(240px 120px at 100% 50%,color-mix(in srgb,var(--dcol) 24%,transparent),transparent 75%)}
+.dsc.on{box-shadow:0 22px 46px -26px var(--dcol),inset 0 -4px 0 var(--dcol)}
+.dshow{border-radius:22px}
+.dbanner{padding:32px 44px;gap:32px}
+.dbi{width:140px;height:140px}
+.dbanner h2{font-size:clamp(2rem,3.6vw,3rem)}
+.dshow .pc,.dshow .pc.top{border-radius:16px}
+.lnk{border-radius:18px}
+@media(max-width:960px){.dsc{padding:14px 16px}.dsc .dsi{width:56px;height:56px}.dsc .dsn{font-size:1.15rem}.dbanner{padding:22px 18px}.dbi{width:100px;height:100px}}
 </style>
 <meta name="theme-color" content="#050b1a">
 <meta name="description" content="Los Santos Police Department portal: promotion requirements, personnel table, radio protocols, violations book and wanted list.">
